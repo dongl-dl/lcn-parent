@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongliang.lcnorder.dao.TblOrderDao">
+  <resultMap id="BaseResultMap" type="com.dongliang.lcnorder.entity.TblOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_name" jdbcType="VARCHAR" property="orderName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.dongliang.lcnorder.entity.TblOrder" useGeneratedKeys="true">
+    insert into tbl_order (order_name)
+    values (#{orderName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.dongliang.lcnorder.entity.TblOrder" useGeneratedKeys="true">
+    insert into tbl_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderName != null">
+        order_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderName != null">
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongliang.lcnorder.entity.TblOrder">
+    update tbl_order
+    <set>
+      <if test="orderName != null">
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongliang.lcnorder.entity.TblOrder">
+    update tbl_order
+    set order_name = #{orderName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

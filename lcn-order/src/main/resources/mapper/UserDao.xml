@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongliang.lcnorder.dao.UserDao">
+  <resultMap id="BaseResultMap" type="com.dongliang.lcnorder.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="mobile" jdbcType="CHAR" property="mobile" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="type" jdbcType="BOOLEAN" property="type" />
+    <result column="balance" jdbcType="DOUBLE" property="balance" />
+    <result column="regTime" jdbcType="TIMESTAMP" property="regtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,uid , mobile, nick_name, pwd, `type`, balance, regTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getUsers" resultType="com.dongliang.lcnorder.entity.User">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    limit 10
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.dongliang.lcnorder.entity.User" useGeneratedKeys="true">
+    insert into user (mobile, nick_name, pwd, 
+      `type`, balance, regTime
+      )
+    values (#{mobile,jdbcType=CHAR}, #{nickName,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{type,jdbcType=BOOLEAN}, #{balance,jdbcType=DOUBLE}, #{regtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.dongliang.lcnorder.entity.User" useGeneratedKeys="true">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="leaveamount != null">
+        balance,
+      </if>
+      <if test="regtime != null">
+        regTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mobile != null">
+        #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BOOLEAN},
+      </if>
+      <if test="leaveamount != null">
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="regtime != null">
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongliang.lcnorder.entity.User">
+    update user
+    <set>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=BOOLEAN},
+      </if>
+      <if test="leaveamount != null">
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="regtime != null">
+        regTime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongliang.lcnorder.entity.User">
+    update user
+    set mobile = #{mobile,jdbcType=CHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=BOOLEAN},
+      balance = #{balance,jdbcType=DOUBLE},
+      regTime = #{regtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="modifyUserAccountBalance" parameterType="java.lang.String">
+     update  user set  balance = balance + 100 where uid = #{uid,jdbcType=INTEGER}
+  </update>
+</mapper>

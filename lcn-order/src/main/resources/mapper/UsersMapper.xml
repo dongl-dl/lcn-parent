@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongliang.lcnorder.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.dongliang.lcnorder.entity.Users">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="userLevel" jdbcType="INTEGER" property="userlevel" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="phoneNum" jdbcType="CHAR" property="phonenum" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastUpdate" jdbcType="TIMESTAMP" property="lastupdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uname, userLevel, age, phoneNum, createTime, lastUpdate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getUsers" resultType="com.dongliang.lcnorder.entity.Users">
+    select
+    <include refid="Base_Column_List" />
+    from users
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.dongliang.lcnorder.entity.Users" useGeneratedKeys="true">
+    insert into users (uname, userLevel, age, 
+      phoneNum, createTime, lastUpdate
+      )
+    values (#{uname,jdbcType=VARCHAR}, #{userlevel,jdbcType=INTEGER}, #{age,jdbcType=INTEGER}, 
+      #{phonenum,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastupdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.dongliang.lcnorder.entity.Users" useGeneratedKeys="true">
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="userlevel != null">
+        userLevel,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="phonenum != null">
+        phoneNum,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="lastupdate != null">
+        lastUpdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="userlevel != null">
+        #{userlevel,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phonenum != null">
+        #{phonenum,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdate != null">
+        #{lastupdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongliang.lcnorder.entity.Users">
+    update users
+    <set>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="userlevel != null">
+        userLevel = #{userlevel,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phonenum != null">
+        phoneNum = #{phonenum,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdate != null">
+        lastUpdate = #{lastupdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongliang.lcnorder.entity.Users">
+    update users
+    set uname = #{uname,jdbcType=VARCHAR},
+      userLevel = #{userlevel,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      phoneNum = #{phonenum,jdbcType=CHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdate = #{lastupdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

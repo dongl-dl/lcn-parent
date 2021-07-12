@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dl.user.mapper.TbUserMapper">
+  <resultMap id="BaseResultMap" type="com.dl.user.domain.User">
+    <id column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+    <result column="source_type" jdbcType="VARCHAR" property="sourceType" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="head_pic" jdbcType="VARCHAR" property="headPic" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="is_mobile_check" jdbcType="VARCHAR" property="isMobileCheck" />
+    <result column="is_email_check" jdbcType="VARCHAR" property="isEmailCheck" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="user_level" jdbcType="INTEGER" property="userLevel" />
+    <result column="points" jdbcType="INTEGER" property="points" />
+    <result column="experience_value" jdbcType="INTEGER" property="experienceValue" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    username, `password`, phone, email, created, updated, source_type, nick_name, `name`, 
+    `status`, head_pic, qq, is_mobile_check, is_email_check, sex, user_level, points, 
+    experience_value, birthday, last_login_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+    <select id="findById" resultType="com.dl.user.domain.User">
+      select
+      <include refid="Base_Column_List" />
+      from tb_user
+      where username = #{username,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_user
+    where username = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="username" keyProperty="username" parameterType="com.dl.user.domain.User" useGeneratedKeys="true">
+    insert into tb_user (`password`, phone, email, 
+      created, updated, source_type, 
+      nick_name, `name`, `status`, 
+      head_pic, qq, is_mobile_check, 
+      is_email_check, sex, user_level, 
+      points, experience_value, birthday, 
+      last_login_time)
+    values (#{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP}, #{sourceType,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{headPic,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{isMobileCheck,jdbcType=VARCHAR}, 
+      #{isEmailCheck,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{userLevel,jdbcType=INTEGER}, 
+      #{points,jdbcType=INTEGER}, #{experienceValue,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="username" keyProperty="username" parameterType="com.dl.user.domain.User" useGeneratedKeys="true">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="headPic != null">
+        head_pic,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="isMobileCheck != null">
+        is_mobile_check,
+      </if>
+      <if test="isEmailCheck != null">
+        is_email_check,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="userLevel != null">
+        user_level,
+      </if>
+      <if test="points != null">
+        points,
+      </if>
+      <if test="experienceValue != null">
+        experience_value,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="headPic != null">
+        #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="isMobileCheck != null">
+        #{isMobileCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="isEmailCheck != null">
+        #{isEmailCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="points != null">
+        #{points,jdbcType=INTEGER},
+      </if>
+      <if test="experienceValue != null">
+        #{experienceValue,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dl.user.domain.User">
+    update tb_user
+    <set>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="headPic != null">
+        head_pic = #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="isMobileCheck != null">
+        is_mobile_check = #{isMobileCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="isEmailCheck != null">
+        is_email_check = #{isEmailCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        user_level = #{userLevel,jdbcType=INTEGER},
+      </if>
+      <if test="points != null">
+        points = #{points,jdbcType=INTEGER},
+      </if>
+      <if test="experienceValue != null">
+        experience_value = #{experienceValue,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dl.user.domain.User">
+    update tb_user
+    set `password` = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP},
+      updated = #{updated,jdbcType=TIMESTAMP},
+      source_type = #{sourceType,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      head_pic = #{headPic,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      is_mobile_check = #{isMobileCheck,jdbcType=VARCHAR},
+      is_email_check = #{isEmailCheck,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      user_level = #{userLevel,jdbcType=INTEGER},
+      points = #{points,jdbcType=INTEGER},
+      experience_value = #{experienceValue,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+</mapper>

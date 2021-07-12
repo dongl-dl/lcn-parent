@@ -1,0 +1,73 @@
+server:
+  port: 1005
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7900/eureka/
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+    web:
+      exposure:
+        include: true
+
+spring:
+  application:
+    name: lcn-gateway
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 1000
+    password: 961230
+    lettuce:
+      pool:
+        max-active: 100
+        max-wait: -1
+        min-idle: 0
+        max-idle: 20
+    ssl: false
+
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+
+      routes:
+        - id: lcn_order_route
+          uri: lb://lcn-order
+          predicates:
+            - Host=cloud.dongl.com**
+            - Path=/api/order/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1
+
+        - id: lcn_user_route
+          uri: lb://lcn-user
+          predicates:
+            - Path=/api/user/**,/api/address/**,/api/vip/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 1

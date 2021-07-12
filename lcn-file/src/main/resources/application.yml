@@ -1,0 +1,37 @@
+server:
+  port: 1006
+
+spring:
+  application:
+    name: lcn-file
+  servlet:  #请求文件大小
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7900/eureka/
+
+fdfs:
+  so-timeout: 1500       # 读取时间
+  connect-timeout: 600   # 连接超时时间
+  thumb-image:           # 缩略图
+    width: 150
+    height: 150
+  tracker-list:          # tracker服务配置地址列表
+    - 192.168.10.41:22122
+  pool:
+    #从池中借出的对象的最大数目（配置为-1表示不限制）
+    max-total: -1
+    #获取连接时的最大等待毫秒数(默认配置为5秒)
+    max-wait-millis: 5000
+    #每个key最大连接数
+    max-total-per-key: 50
+    #每个key对应的连接池最大空闲连接数
+    max-idle-per-key: 10
+    #每个key对应的连接池最小空闲连接数
+    min-idle-per-key: 5
+upload:
+  baseUrl: http://192.168.10.41/

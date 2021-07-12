@@ -1,0 +1,58 @@
+server:
+  port: 1004
+
+spring:
+  application:
+    name: lcn-user
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.98.119.49:3306/test?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ellabook
+    password: Ellabook@13579
+    dbcp2:
+      initial-size: 5
+      min-idle: 5
+      max-total: 5
+      max-wait-millis: 200
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7900/eureka/
+
+rocketmq:
+  name-server: 192.168.10.17:9876
+  producer:
+    group: ${spring.application.name}
+    send-message-timeout: 3000
+    retry-times-when-send-failed: 3
+
+mq:
+  user:
+    topic: tpk02
+    group:
+      name: lcn-pay
+    tag: tag02
+    key: key02
+
+fastdfs:
+  connect_timeout_in_seconds: 120
+  network_timeout_in_seconds: 120
+  charset: UTF-8
+  tracker_servers: 192.168.10.25:22122
+  tracker_http_port: 80
