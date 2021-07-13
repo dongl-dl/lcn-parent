@@ -35,8 +35,8 @@ public class FastDFSClient {
     @Value("${fastdfs.charset}")
     private String charset;
 
-    @Value("fastdfs.tracker_http_port")
-    private int tracker_http_port;
+//    @Value("fastdfs.tracker_http_port")
+    private int tracker_http_port=80;
 
     /**
      * 初始化fastDFS的环境

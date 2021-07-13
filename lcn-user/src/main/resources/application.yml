@@ -55,4 +55,4 @@ fastdfs:
   network_timeout_in_seconds: 120
   charset: UTF-8
   tracker_servers: 192.168.10.25:22122
-  tracker_http_port: 80
+#  tracker_http_port: 80
