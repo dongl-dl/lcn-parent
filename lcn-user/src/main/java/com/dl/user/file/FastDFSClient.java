@@ -35,8 +35,8 @@ public class FastDFSClient {
     @Value("${fastdfs.charset}")
     private String charset;
 
-//    @Value("fastdfs.tracker_http_port")
-    private int tracker_http_port=80;
+    @Value("fastdfs.tracker_http_port")
+    private String tracker_http_port;
 
     /**
      * 初始化fastDFS的环境
@@ -47,7 +47,7 @@ public class FastDFSClient {
             ClientGlobal.setG_connect_timeout(connect_timeout);
             ClientGlobal.setG_network_timeout(network_timeout);
             ClientGlobal.setG_charset(charset);
-            ClientGlobal.setG_tracker_http_port(tracker_http_port);
+            ClientGlobal.setG_tracker_http_port(Integer.parseInt(tracker_http_port));
         } catch (Exception e) {
             log.error("初始化fastDFS的环境失败~");
         }
