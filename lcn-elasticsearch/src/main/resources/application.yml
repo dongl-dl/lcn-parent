@@ -1,0 +1,11 @@
+server:
+  port: 1007
+
+spring:
+  application:
+    name: lcn-es
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7900/eureka/
