@@ -8,17 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableEurekaClient
-@RestController
 public class LcnElasticsearchApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LcnElasticsearchApplication.class, args);
-    }
-
-
-    @GetMapping("/es")
-    public String getEs(){
-        return "es-----------";
     }
 
 }
