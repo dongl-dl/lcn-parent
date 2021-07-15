@@ -5,6 +5,10 @@ spring:
   application:
     name: lcn-es
 
+  elasticsearch:
+    rest:
+      uris: http://192.168.10.61:9200
+
 eureka:
   client:
     service-url:
