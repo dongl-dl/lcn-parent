@@ -43,7 +43,7 @@ public class AsyncController {
 
                 String data = "success";
                 System.out.println(idWorker.nextId());
-                return data;
+                return String.valueOf(idWorker.nextId());
             }
         });
 
