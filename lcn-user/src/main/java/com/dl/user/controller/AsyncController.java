@@ -1,6 +1,7 @@
 package com.dl.user.controller;
 
 import com.dl.user.service.AsyncService;
+import com.dongl.common.distributedid.IDWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
@@ -25,6 +25,9 @@ public class AsyncController {
     private AsyncService asyncService;
 
     @Autowired
+    private IDWorker idWorker;
+
+    @Autowired
     private ThreadPoolTaskExecutor taskExecutor;
 
     @GetMapping("/async")
@@ -39,7 +42,7 @@ public class AsyncController {
             public String call() throws Exception {
 
                 String data = "success";
-                System.out.println(data);
+                System.out.println(idWorker.nextId());
                 return data;
             }
         });

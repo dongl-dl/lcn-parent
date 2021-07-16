@@ -1,5 +1,6 @@
 package com.dl.user;
 
+import com.dongl.common.distributedid.IDWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -14,6 +15,11 @@ public class LcnUserApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LcnUserApplication.class, args);
+    }
+
+    @Bean
+    public IDWorker getBean(){
+        return new IDWorker(1,2);
     }
 
     @Bean
