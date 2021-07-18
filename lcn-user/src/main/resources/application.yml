@@ -56,3 +56,14 @@ fastdfs:
   charset: UTF-8
   tracker_servers: 192.168.10.25:22122
 #  tracker_http_port: 80
+
+# 异步线程配置
+async:
+  executor:
+    thread:
+      core_pool_size: 5
+      max_pool_size: 5
+      queue_capacity: 99999
+      keepAliveSeconds: 60
+      name:
+        prefix: async-service-user_
