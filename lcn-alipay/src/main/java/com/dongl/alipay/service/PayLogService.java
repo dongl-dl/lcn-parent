@@ -1,7 +1,6 @@
 package com.dongl.alipay.service;
 
 
-import com.dongl.alipay.entity.PageBean;
 import com.dongl.alipay.entity.PayLog;
 import com.dongl.alipay.mapper.PayLogDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PayLogService {
 	
-	@Autowired
+	@Autowired(required=false)
 	private PayLogDao payLogDao;
 	
 	/**
@@ -24,7 +23,7 @@ public class PayLogService {
 	 * @return
 	 */
 	public PayLog find(Long id){
-		return payLogDao.find(id);
+		return payLogDao.findPayLog(id);
 	}
 	
 	/**

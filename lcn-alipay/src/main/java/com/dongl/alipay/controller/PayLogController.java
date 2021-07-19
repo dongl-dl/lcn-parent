@@ -155,7 +155,7 @@ public class PayLogController {
 			return Result.error(CodeMsg.PAY_REFUND_ERROR);
 		}
 		//再次检查金额是否合法
-		BigDecimal avaliableRefund = existPayLog.getTotalAmount().subtract(existPayLog.getTotalRefundAmount());
+		BigDecimal avaliableRefund = existPayLog.getTotalAmount().subtract(existPayLog.getRefundAmount());
 		if(refundLog.getRefundAmount().compareTo(avaliableRefund) > 0){
 			CodeMsg codeMsg = CodeMsg.PAY_REFUND_ERROR;
 			codeMsg.setMsg("可退金额不得超过" + avaliableRefund);
@@ -172,8 +172,8 @@ public class PayLogController {
 			codeMsg.setMsg(parseObject.getJSONObject("alipay_trade_refund_response").getString("sub_msg"));
 			return Result.error(codeMsg);
 		}
-		existPayLog.setTotalRefundAmount(existPayLog.getTotalRefundAmount().add(refundLog.getRefundAmount()));
-		if(existPayLog.getTotalRefundAmount().compareTo(existPayLog.getTotalAmount()) == 0){
+		existPayLog.setRefundAmount(existPayLog.getRefundAmount().add(refundLog.getRefundAmount()));
+		if(existPayLog.getRefundAmount().compareTo(existPayLog.getTotalAmount()) == 0){
 			existPayLog.setStatus(PayLog.pay_status_refunded);
 		}else{
 			existPayLog.setStatus(PayLog.pay_status_part_refunded);

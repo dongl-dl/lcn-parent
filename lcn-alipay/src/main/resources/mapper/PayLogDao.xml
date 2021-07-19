@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongl.alipay.mapper.PayLogDao">
+  <resultMap id="BaseResultMap" type="com.dongl.alipay.entity.PayLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="pay_sn" jdbcType="VARCHAR" property="paySn" />
+    <result column="payment" jdbcType="INTEGER" property="payment" />
+    <result column="refund_amount" jdbcType="DECIMAL" property="refundAmount" />
+    <result column="refund_info" jdbcType="VARCHAR" property="refundInfo" />
+    <result column="refund_sn" jdbcType="VARCHAR" property="refundSn" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="refund_time" jdbcType="TIMESTAMP" property="refundTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, update_time, info, pay_sn, payment, refund_amount, refund_info, 
+    refund_sn, sn, `status`, title, total_amount, pay_time, refund_time
+  </sql>
+  <select id="findPayLog" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pay_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findRefundLog" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pay_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findByRefundSn" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pay_log
+    where refund_sn = #{refundSn,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findByPayLogId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pay_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findBySn" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pay_log
+    where sn = #{sn,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findByPaySn" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pay_log
+    where pay_sn = #{paySn,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pay_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.dongl.alipay.entity.PayLog" useGeneratedKeys="true">
+    insert into pay_log (create_time, update_time, info, 
+      pay_sn, payment, refund_amount, 
+      refund_info, refund_sn, sn, 
+      `status`, title, total_amount, 
+      pay_time, refund_time)
+    values (#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{info,jdbcType=VARCHAR}, 
+      #{paySn,jdbcType=VARCHAR}, #{payment,jdbcType=INTEGER}, #{refundAmount,jdbcType=DECIMAL}, 
+      #{refundInfo,jdbcType=VARCHAR}, #{refundSn,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{refundTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.dongl.alipay.entity.PayLog" useGeneratedKeys="true">
+    insert into pay_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="paySn != null">
+        pay_sn,
+      </if>
+      <if test="payment != null">
+        payment,
+      </if>
+      <if test="refundAmount != null">
+        refund_amount,
+      </if>
+      <if test="refundInfo != null">
+        refund_info,
+      </if>
+      <if test="refundSn != null">
+        refund_sn,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="refundTime != null">
+        refund_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="paySn != null">
+        #{paySn,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null">
+        #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="refundInfo != null">
+        #{refundInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundSn != null">
+        #{refundSn,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundTime != null">
+        #{refundTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongl.alipay.entity.PayLog">
+    update pay_log
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="paySn != null">
+        pay_sn = #{paySn,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        payment = #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="refundAmount != null">
+        refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="refundInfo != null">
+        refund_info = #{refundInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundSn != null">
+        refund_sn = #{refundSn,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundTime != null">
+        refund_time = #{refundTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongl.alipay.entity.PayLog">
+    update pay_log
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      info = #{info,jdbcType=VARCHAR},
+      pay_sn = #{paySn,jdbcType=VARCHAR},
+      payment = #{payment,jdbcType=INTEGER},
+      refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      refund_info = #{refundInfo,jdbcType=VARCHAR},
+      refund_sn = #{refundSn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      refund_time = #{refundTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

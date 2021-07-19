@@ -2,7 +2,7 @@ package com.dongl.alipay.service;
 
 
 import com.dongl.alipay.entity.RefundLog;
-import com.dongl.alipay.mapper.RefundLogDao;
+import com.dongl.alipay.mapper.PayLogDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,8 @@ import java.util.List;
 @Service
 public class RefundLogService {
 	
-	@Autowired
-	private RefundLogDao refundLogDao;
+	@Autowired(required=false)
+	private PayLogDao refundLogDao;
 	
 	/**
 	 * 根据id查询
@@ -25,7 +25,7 @@ public class RefundLogService {
 	 * @return
 	 */
 	public RefundLog find(Long id){
-		return refundLogDao.find(id);
+		return refundLogDao.findRefundLog(id);
 	}
 	
 	/**

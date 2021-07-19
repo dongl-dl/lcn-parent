@@ -9,6 +9,7 @@ import com.dongl.alipay.entity.PayLog;
 import com.dongl.alipay.entity.Payment;
 import com.dongl.alipay.paytype.Alipay;
 import com.dongl.alipay.service.PayLogService;
+import com.dongl.alipay.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,16 +46,16 @@ public class PayController {
 			return RuntimeConstant.RUNTIME_ERROR_VIEW;
 		}
 		//根据支付记录来判断支付方式
-		if(payLog.getPayment() == Payment.Alipay){
+		if(payLog.getPayment() == 1){
 			//表示是支付宝支付
 			String html = null;
 			//判断浏览器是手机还是pc
-//			if(StringUtil.isMobile(request)){
-//				//表示是手机浏览器
-//				html = Alipay.generateWapPayHtml(payLog.getSn(), payLog.getTotalAmount(), payLog.getTitle(), payLog.getInfo());
-//			}else{
-//				html = Alipay.generatePcPayHtml(payLog.getSn(), payLog.getTotalAmount(), payLog.getTitle(), payLog.getInfo());
-//			}
+			if(StringUtil.isMobile(request)){
+				//表示是手机浏览器
+				html = Alipay.generateWapPayHtml(payLog.getSn(), payLog.getTotalAmount(), payLog.getTitle(), payLog.getInfo());
+			}else{
+				html = Alipay.generatePcPayHtml(payLog.getSn(), payLog.getTotalAmount(), payLog.getTitle(), payLog.getInfo());
+			}
 			model.addAttribute("html", html);
 			return "pay/alipay/alipay_pc";
 		}

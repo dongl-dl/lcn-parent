@@ -1,16 +1,32 @@
 package com.dongl.alipay.mapper;
-/**
- * 支付记录数据库操作层
- */
 
 import com.dongl.alipay.entity.PayLog;
-import org.springframework.stereotype.Repository;
+import com.dongl.alipay.entity.RefundLog;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+import java.util.List;
+
+@Mapper
 public interface PayLogDao {
-	PayLog find(Long id);
-	
-	PayLog findBySn(String sn);
-	
-	PayLog findByPaySn(String paySn);
+    int deleteByPrimaryKey(Long id);
+
+    int insert(PayLog record);
+
+    int insertSelective(PayLog record);
+
+    int updateByPrimaryKeySelective(PayLog record);
+
+    int updateByPrimaryKey(PayLog record);
+
+    RefundLog findRefundLog(Long id);
+
+    PayLog findPayLog(Long id);
+
+    PayLog findBySn(String sn);
+
+    PayLog findByPaySn(String paySn);
+
+    RefundLog findByRefundSn(String refundSn);
+
+    List<RefundLog> findByPayLogId(Long payLogId);
 }
