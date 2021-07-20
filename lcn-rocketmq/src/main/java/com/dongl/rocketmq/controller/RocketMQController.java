@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author D-L
  * @version 1.0.0
  * @ClassName UserController.java
- * @Description TODO
+ * @Description mq 控制层
  * @createTime 2021-06-22 13:45:00
  */
 @RestController
