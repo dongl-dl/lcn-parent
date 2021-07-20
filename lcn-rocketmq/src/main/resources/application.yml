@@ -1,0 +1,26 @@
+server:
+  port: 1009
+
+spring:
+  application:
+    name: lcn-rocketmq
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7900/eureka/
+
+rocketmq:
+  name-server: 192.168.10.17:9876
+  producer:
+    group: ${spring.application.name}
+    send-message-timeout: 3000
+    retry-times-when-send-failed: 3
+
+mq:
+  user:
+    topic: tpk02
+    group:
+      name: lcn-pay
+    tag: tag02
+    key: key02
