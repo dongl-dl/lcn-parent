@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @createTime 2021-06-22 13:45:00
  */
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/mq")
+public class RocketMQController {
 
     @Autowired
     private RocketMqService rocketMqService;
