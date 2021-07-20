@@ -13,11 +13,6 @@ import java.util.concurrent.TimeUnit;
 import static com.dl.user.util.HttpMethod.POST;
 
 
-/**
- * @author xixiaoyi
- * @date 2019-04-24 08:10
- * @since 1.0.0
- */
 public class HttpUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpUtil.class);
 
