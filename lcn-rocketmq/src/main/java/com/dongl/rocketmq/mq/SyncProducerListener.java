@@ -1,4 +1,4 @@
-package com.dongl.rocketmq.config;
+package com.dongl.rocketmq.mq;
 
 import com.dongl.rocketmq.service.RocketMqService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @createTime 2021-06-22 14:51:00
  */
 @Slf4j
-@RocketMQTransactionListener(txProducerGroup = "lcn-user01")
+@RocketMQTransactionListener(txProducerGroup = "lcn-syn")
 public class SyncProducerListener implements RocketMQLocalTransactionListener {
     private ConcurrentHashMap<Integer, RocketMQLocalTransactionState> map=new ConcurrentHashMap<>();
 

@@ -1,4 +1,4 @@
-package com.dongl.rocketmq.entity;
+package com.dongl.common.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

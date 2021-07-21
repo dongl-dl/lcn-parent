@@ -21,6 +21,6 @@ mq:
   user:
     topic: tpk02
     group:
-      name: lcn-pay
+      name: lcn-syn
     tag: tag02
     key: key02

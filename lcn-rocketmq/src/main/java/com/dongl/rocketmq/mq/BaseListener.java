@@ -1,13 +1,13 @@
-package com.dongl.rocketmq.config;
+package com.dongl.rocketmq.mq;
 
+import com.dongl.common.mq.MsgHandlerDispatcher;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.ConsumeMode;
 import org.apache.rocketmq.spring.annotation.MessageModel;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
@@ -34,19 +34,26 @@ import java.io.UnsupportedEncodingException;
 //         consumeMode = ConsumeMode.ORDERLY
 )
 public class BaseListener implements RocketMQListener<MessageExt> {
+    @Autowired
+    private MsgHandlerDispatcher dispatcher;
+
     @Override
     public void onMessage(MessageExt messageExt) {
 
-        log.info("开始接收到消息---------------------------------------");
+        log.info("开始接收到消息------------");
         //1.解析消息内容
+        String msgContent = null;
         try {
-            String body = new String(messageExt.getBody(),"UTF-8");
-//            User user = JSON.parseObject(body, User.class);
-//            log.info("消息内容-------------：" + user);
-            log.info("消息内容-------------：" + body);
+            msgContent = new String(messageExt.getBody(),"UTF-8");
         } catch (UnsupportedEncodingException e) {
-            log.error("接收到消息失败 ,{}" ,e);
+            log.info("解析消息内容失败------------");
         }
-        log.info("消息消费完成-----------------------------------------");
+        log.info("Receive msg [{}]", msgContent);
+        boolean dispatch = dispatcher.dispatch(msgContent);
+        if(dispatch){
+            log.info("消息消费成功----------");
+        }else {
+            log.info("消息消费失败----------");
+        }
     }
 }
