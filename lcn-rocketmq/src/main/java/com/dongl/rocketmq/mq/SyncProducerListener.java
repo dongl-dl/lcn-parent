@@ -26,6 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 @RocketMQTransactionListener(txProducerGroup = "lcn-syn")
 public class SyncProducerListener implements RocketMQLocalTransactionListener {
+    //本地缓存发送消息的状态信息
     private ConcurrentHashMap<Integer, RocketMQLocalTransactionState> map=new ConcurrentHashMap<>();
 
     @Autowired
@@ -35,21 +36,22 @@ public class SyncProducerListener implements RocketMQLocalTransactionListener {
     public RocketMQLocalTransactionState executeLocalTransaction(Message message, Object o) {
         map.put(message.hashCode(),RocketMQLocalTransactionState.UNKNOWN);
 
+        //TODO 处理本地事务
         String result = rocketMqService.updateUserInfo();
 
+        //根据本地事务处理状态 回滚或提交   来处理事务消息的回滚和提交
         if(!result.equalsIgnoreCase("OK")){
-            System.out.println("本地事务出错，回滚事务消息--------");
+            log.info("本地事务出错，回滚事务消息");
             map.put(message.hashCode(),RocketMQLocalTransactionState.ROLLBACK);
         }else {
             map.put(message.hashCode(),RocketMQLocalTransactionState.COMMIT);
         }
-        log.info(map.get(message.hashCode()).toString());
         return map.get(message.hashCode());
     }
 
     @Override
     public RocketMQLocalTransactionState checkLocalTransaction(Message message) {
-        System.out.println("没有获得消息ack  -----  进行消息回查   消息的Tag:" + message);
-        return map.get(message.hashCode());
+        log.info("没有获得消息ack-----进行消息回查，回查状态：{}" ,  map.get(message.hashCode()) );
+        return RocketMQLocalTransactionState.COMMIT;
     }
 }
