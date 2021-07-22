@@ -1,6 +1,9 @@
 package com.dl.user.service;
 
+import com.dongl.common.mq.BaseMsg;
+import com.dongl.common.mq.MsgSender;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.rocketmq.client.producer.*;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +44,15 @@ public class RocketMqService {
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
 
+
+    @Autowired
+    private MsgSender msgSender;
+
+    public String sendMsg01(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
+        String s = msgSender.syncSend( msg ,mqConfig);
+        return s;
+    }
+
     /**
      * 发送同步消息
      * @return
@@ -68,7 +80,7 @@ public class RocketMqService {
      * 发送同步消息
      * @return
      */
-    public String sendMsg01(){
+    public String sendMsg011(){
         threadPoolTaskExecutor.submit(new Runnable() {
             @Override
             public void run() {

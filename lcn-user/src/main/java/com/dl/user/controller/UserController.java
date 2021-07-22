@@ -1,13 +1,16 @@
 package com.dl.user.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.dl.user.config.threadpool.RocketMQConfig;
 import com.dl.user.domain.MqUser;
 import com.dl.user.domain.User;
 import com.dl.user.service.RocketMqService;
 import com.dl.user.service.UserService;
 import com.dl.user.util.ResponseParams;
+import com.dongl.common.mq.message.SynUserInfoMsg;
 import com.dongl.common.utils.JwtUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +38,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RocketMQConfig config;
 
 
     /***
@@ -77,9 +83,16 @@ public class UserController {
         return result;
     }
 
+    /**
+     * 发送同步消息
+     * @return
+     */
     @GetMapping("/sendMsg01")
     public String sendMsg01(){
-        String result = rocketMqService.sendMsg01();
+        com.dongl.common.entity.User user = com.dongl.common.entity.User.builder().id(1).name("董亮").build();
+        SynUserInfoMsg synUserInfoMsg = SynUserInfoMsg.builder().id(UUID.randomUUID().toString()).uid("U2022107211059").user(user).build();
+        ImmutableTriple<String , String, String> mqConfig = ImmutableTriple.of(config.getGroupName() , config.getTopic() , config.getTag());
+        String result = rocketMqService.sendMsg01(synUserInfoMsg ,mqConfig);
         return result;
     }
 

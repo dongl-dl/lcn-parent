@@ -42,6 +42,12 @@ rocketmq:
     send-message-timeout: 3000
     retry-times-when-send-failed: 3
 
+
+rocketmq-base:
+  topic: user-topic
+  groupName: lcn-syn
+  tag: user-tag
+
 mq:
   user:
     topic: tpk02

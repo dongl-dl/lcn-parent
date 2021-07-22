@@ -69,11 +69,13 @@ public class TaskMsgHandlerDispatcher implements ApplicationContextAware, MsgHan
     @Override
     public boolean dispatch(String msgContent) {
         if (StringUtils.isBlank(msgContent)) {
-            log.info("msgContent is null!");
+            log.info("处理消息----------------msgContent is null!");
             return false;
         }
         JSONObject msgJsonObj = JSON.parseObject(msgContent);
+        //获取 handlerKey（消息处理key）
         String handlerKey = msgJsonObj.getString(MqUtil.HANDLER_KEY_NAME);
+        //通过 handlerKey 获取handlerBean （消息处理类型实例对象：项目启动时加载到handlers的缓存）
         HandlerNMsgType handlerNMsgType = handlers.get(handlerKey);
         if (Objects.isNull(handlerNMsgType)) {
             log.info("Handler for [{}] does not existed!", handlerKey);
