@@ -3,6 +3,7 @@ package com.dongl.rocketmq.service;
 import com.dongl.common.mq.BaseMsg;
 import com.dongl.common.mq.MsgSender;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,28 +21,28 @@ public class RocketMqService {
     @Autowired
     private MsgSender msgSender;
 
-    public String sendMsg01(BaseMsg msg) {
-        String s = msgSender.syncSend(msg);
+    public String sendMsg01(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
+        String s = msgSender.syncSend( msg ,mqConfig);
         return s;
     }
 
-    public String sendMsg02(BaseMsg msg) {
-        String s = msgSender.asyncSend(msg);
+    public String sendMsg02(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
+        String s = msgSender.asyncSend(msg , mqConfig);
         return s;
     }
 
-    public String sendOneWayMsg(BaseMsg msg) {
-        String s = msgSender.sendOneWay(msg);
+    public String sendOneWayMsg(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
+        String s = msgSender.sendOneWay(msg , mqConfig);
         return s;
     }
 
-    public String sendOrderlyMsg(BaseMsg msg) {
-        String s = msgSender.syncSendOrderly(msg);
+    public String sendOrderlyMsg(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
+        String s = msgSender.syncSendOrderly(msg , mqConfig);
         return s;
     }
 
-    public String sendTransactionMessage(BaseMsg msg) {
-        String s = msgSender.sendMessageInTransaction(msg);
+    public String sendTransactionMessage(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
+        String s = msgSender.sendMessageInTransaction(msg , mqConfig);
         return s;
     }
 

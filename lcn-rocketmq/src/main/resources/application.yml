@@ -17,10 +17,11 @@ rocketmq:
     send-message-timeout: 3000
     retry-times-when-send-failed: 3
 
-mq:
-  user:
-    topic: tpk02
-    group:
-      name: lcn-syn
-    tag: tag02
-    key: key02
+rocketmq-base:
+  topic: user-topic
+  groupName: lcn-syn
+  tag: user-tag
+
+  userDeleteTopic: topic-delete
+  userDeleteGroupName: lcn-syn-delete
+  userDeletetag: user-tag-delete

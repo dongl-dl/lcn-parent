@@ -1,7 +1,6 @@
 package com.dongl.common.mq.message;
 
 import com.dongl.common.mq.BaseMsg;
-import com.dongl.common.mq.MsgTagEnum;
 import lombok.*;
 
 /**
@@ -17,17 +16,16 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserLoginSuccessMsg extends BaseMsg {
-
-    //消息Id
+    /**
+     * 消息ID，可用于控制台消息补发，请保证全局唯一
+     */
     private String id;
 
-    //账户uid
+    /**
+     * 账户uid
+     */
     private String uid;
 
+    //登录时间
     private String loginTime;
-
-    @Override
-    public String getTag() {
-        return MsgTagEnum.LOGIN.getTag();
-    }
 }

@@ -21,7 +21,7 @@ import java.io.UnsupportedEncodingException;
  */
 @Slf4j
 @Component
-@RocketMQMessageListener(topic = "${mq.user.topic}",consumerGroup = "${mq.user.group.name}", selectorExpression = "*" ,
+@RocketMQMessageListener(topic = "${rocketmq-base.topic}",consumerGroup = "${rocketmq-base.groupName}", selectorExpression = "*" ,
         //消费模式：广播
         messageModel = MessageModel.BROADCASTING,
         //消费模式：集群消费模式（默认情况）
