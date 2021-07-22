@@ -48,9 +48,8 @@ public class RocketMqService {
     @Autowired
     private MsgSender msgSender;
 
-    public String sendMsg01(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
-        String s = msgSender.syncSend( msg ,mqConfig);
-        return s;
+    public String sendMsg01(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) throws Exception {
+        return msgSender.syncSend( msg ,mqConfig);
     }
 
     /**

@@ -92,7 +92,12 @@ public class UserController {
         com.dongl.common.entity.User user = com.dongl.common.entity.User.builder().id(1).name("董亮").build();
         SynUserInfoMsg synUserInfoMsg = SynUserInfoMsg.builder().id(UUID.randomUUID().toString()).uid("U2022107211059").user(user).build();
         ImmutableTriple<String , String, String> mqConfig = ImmutableTriple.of(config.getGroupName() , config.getTopic() , config.getTag());
-        String result = rocketMqService.sendMsg01(synUserInfoMsg ,mqConfig);
+        String result = null;
+        try {
+            result = rocketMqService.sendMsg01(synUserInfoMsg ,mqConfig);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return result;
     }
 

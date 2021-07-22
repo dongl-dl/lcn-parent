@@ -60,7 +60,7 @@ public class RocketMQClient implements MsgSender {
     }
 
     @Override
-    public String asyncSend(BaseMsg msg , ImmutableTriple<String ,String ,String> config) {
+    public void asyncSend(BaseMsg msg , ImmutableTriple<String ,String ,String> config) {
         taskExecutor.submit(new Runnable() {
             @Override
             public void run() {
@@ -81,7 +81,6 @@ public class RocketMQClient implements MsgSender {
                 });
             }
         });
-        return "ok";
     }
 
     @Override

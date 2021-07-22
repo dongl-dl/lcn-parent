@@ -7,6 +7,8 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * @author D-L
  * @version 1.0.0
@@ -21,43 +23,28 @@ public class RocketMqService {
     @Autowired
     private MsgSender msgSender;
 
-    public String sendMsg01(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
-        String s = msgSender.syncSend( msg ,mqConfig);
-        return s;
+    public String sendMsg01(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) throws Exception {
+        return msgSender.syncSend( msg ,mqConfig);
     }
 
-    public String sendMsg02(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
-        String s = msgSender.asyncSend(msg , mqConfig);
-        return s;
+    public void sendMsg02(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
+        msgSender.asyncSend(msg , mqConfig);
     }
 
     public String sendOneWayMsg(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
-        String s = msgSender.sendOneWay(msg , mqConfig);
-        return s;
+        return msgSender.sendOneWay(msg , mqConfig);
     }
 
     public String sendOrderlyMsg(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
-        String s = msgSender.syncSendOrderly(msg , mqConfig);
-        return s;
+        return msgSender.syncSendOrderly(msg , mqConfig);
     }
 
-    public String sendTransactionMessage(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) {
-        String s = msgSender.sendMessageInTransaction(msg , mqConfig);
-        return s;
+    public String sendTransactionMessage(BaseMsg msg , ImmutableTriple<String , String, String> mqConfig) throws Exception {
+        return msgSender.sendMessageInTransaction(msg , mqConfig);
     }
 
-    /**
-     *
-     * @return
-     */
-    public String updateUserInfo(){
-        log.info("操作用户信息------------------------------------");
-        try {
-//            int count = 1/0;
-        }catch (Exception e) {
-            log.info("操作用户信息失败---------------");
-            return "fail";
-        }
-        return "ok";
+    public String updateUserInfo() {
+        int i = 1/0;
+        return "OK";
     }
 }

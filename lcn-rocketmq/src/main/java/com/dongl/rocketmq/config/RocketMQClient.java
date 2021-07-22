@@ -34,12 +34,11 @@ public class RocketMQClient implements MsgSender {
     private RocketMQTemplate rocketMQTemplate;
 
     @Override
-    public String syncSend(BaseMsg msg ,  ImmutableTriple<String ,String ,String> config) {
+    public String syncSend(BaseMsg msg ,  ImmutableTriple<String ,String ,String> config) throws Exception {
         Future<SendResult> submit = taskExecutor.submit(new Callable<SendResult>() {
             @Override
             public SendResult call() {
-                String msgContent = JSON.toJSONString(msg);
-                Message message = MessageBuilder.withPayload(msgContent).build();
+                Message message = MessageBuilder.withPayload(JSON.toJSONString(msg)).build();
                 String destination = String.format("%s:%s", config.getMiddle(), config.getRight());
                 SendResult sendResult = rocketMQTemplate.syncSend(destination, message);
                 if (sendResult.getSendStatus().equals(SendStatus.SEND_OK)) {
@@ -50,22 +49,16 @@ public class RocketMQClient implements MsgSender {
                 return sendResult;
             }
         });
-        SendStatus sendStatus = null;
-        try {
-            sendStatus = submit.get().getSendStatus();
-        } catch (Exception e) {
-            log.error("获取消息发送状态失败");
-        }
-        return sendStatus.toString();
+        SendResult sendResult = submit.get();
+        return sendResult.getSendStatus().toString();
     }
 
     @Override
-    public String asyncSend(BaseMsg msg , ImmutableTriple<String ,String ,String> config) {
+    public void asyncSend(BaseMsg msg , ImmutableTriple<String ,String ,String> config) {
         taskExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                String msgContent = JSON.toJSONString(msg);
-                Message message = MessageBuilder.withPayload(msgContent).build();
+                Message message = MessageBuilder.withPayload(JSON.toJSONString(msg)).build();
                 String destination = String.format("%s:%s",config.getMiddle() , config.getRight());
                 rocketMQTemplate.asyncSend(destination, message, new SendCallback() {
                     @Override
@@ -81,14 +74,12 @@ public class RocketMQClient implements MsgSender {
                 });
             }
         });
-        return "ok";
     }
 
     @Override
     public String sendOneWay(BaseMsg msg , ImmutableTriple<String ,String ,String> config) {
         log.info("发送单项消息------------------------------------");
-        String msgContent = JSON.toJSONString(msg);
-        Message<String> message = MessageBuilder.withPayload(msgContent).build();
+        Message<String> message = MessageBuilder.withPayload(JSON.toJSONString(msg)).build();
         String destination = String.format("%s:%s", config.getMiddle() , config.getRight());
         rocketMQTemplate.sendOneWay(destination , message);
         return "ok";
@@ -113,25 +104,19 @@ public class RocketMQClient implements MsgSender {
     }
 
     @Override
-    public String sendMessageInTransaction(BaseMsg msg , ImmutableTriple<String ,String ,String> config) {
+    public String sendMessageInTransaction(BaseMsg msg , ImmutableTriple<String ,String ,String> config) throws Exception {
         log.info("【发送消息】-------------");
         Future<TransactionSendResult> submit = taskExecutor.submit(new Callable<TransactionSendResult>() {
             @Override
             public TransactionSendResult call() {
-                String msgContent = JSON.toJSONString(msg);
-                Message message = MessageBuilder.withPayload(msgContent).build();
+                Message message = MessageBuilder.withPayload(JSON.toJSONString(msg)).build();
                 String destination = String.format("%s:%s",config.getMiddle() , config.getRight());
                 TransactionSendResult result = rocketMQTemplate.sendMessageInTransaction(config.getLeft(), destination, message, null);
                 log.info("【发送状态】：{}", result.getLocalTransactionState());
                 return result;
             }
         });
-        LocalTransactionState localTransactionState = null;
-        try {
-            localTransactionState = submit.get().getLocalTransactionState();
-        } catch (Exception e) {
-            log.error("获取消息发送状态失败------------------");
-        }
+        LocalTransactionState localTransactionState = submit.get().getLocalTransactionState();
         return localTransactionState.toString();
     }
 }

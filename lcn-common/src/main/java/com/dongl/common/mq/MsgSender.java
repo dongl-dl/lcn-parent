@@ -2,8 +2,6 @@ package com.dongl.common.mq;
 
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
-import java.util.List;
-
 /**
  * @author D-L
  * @version 1.0.0
@@ -17,13 +15,13 @@ public interface MsgSender {
      * 发送同步消息
      * @return
      */
-    String syncSend(BaseMsg msg , ImmutableTriple<String ,String ,String> config);
+    String syncSend(BaseMsg msg , ImmutableTriple<String ,String ,String> config) throws Exception;
 
     /**
      * 发送异步消息
      * @return
      */
-    String asyncSend(BaseMsg msg , ImmutableTriple<String ,String ,String> config);
+    void asyncSend(BaseMsg msg , ImmutableTriple<String ,String ,String> config);
 
     /**
      * 发送单项消息
@@ -44,5 +42,5 @@ public interface MsgSender {
      * @param msg
      * @return
      */
-    String sendMessageInTransaction(BaseMsg msg , ImmutableTriple<String ,String ,String> config);
+    String sendMessageInTransaction(BaseMsg msg , ImmutableTriple<String ,String ,String> config) throws Exception;
 }
