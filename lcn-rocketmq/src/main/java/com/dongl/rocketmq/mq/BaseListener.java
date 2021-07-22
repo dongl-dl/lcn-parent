@@ -39,21 +39,19 @@ public class BaseListener implements RocketMQListener<MessageExt> {
 
     @Override
     public void onMessage(MessageExt messageExt) {
-
-        log.info("开始接收到消息------------");
         //1.解析消息内容
         String msgContent = null;
         try {
             msgContent = new String(messageExt.getBody(),"UTF-8");
         } catch (UnsupportedEncodingException e) {
-            log.info("解析消息内容失败------------");
+            log.info("解析消息内容失败");
         }
         log.info("Receive msg [{}]", msgContent);
         boolean dispatch = dispatcher.dispatch(msgContent);
         if(dispatch){
-            log.info("消息消费成功----------");
+            log.info("消息消费成功");
         }else {
-            log.info("消息消费失败----------");
+            log.info("消息消费失败");
         }
     }
 }
