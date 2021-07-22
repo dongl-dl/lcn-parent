@@ -6,7 +6,7 @@ import lombok.Data;
  * @author D-L
  * @version 1.0.0
  * @ClassName HandlerNMsgType.java
- * @Description TODO
+ * @Description 消息处理类型
  * @createTime 2021-07-21 10:01:00
  */
 @Data

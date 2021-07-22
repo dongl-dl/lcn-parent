@@ -1,7 +1,11 @@
 package com.dongl.common.mq;
 
 /**
- * 消息处理器调度器接口
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName MsgHandlerDispatcher.java
+ * @Description 消息处理器调度器接口
+ * @createTime 2021-07-21 22:50:00
  */
 public interface MsgHandlerDispatcher {
 

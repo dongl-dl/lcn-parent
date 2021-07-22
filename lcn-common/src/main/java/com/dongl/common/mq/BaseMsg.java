@@ -3,8 +3,13 @@ package com.dongl.common.mq;
 
 import lombok.Data;
 
+
 /**
- * MQ消息体基类
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName MsgHandlerDispatcher.java
+ * @Description MQ消息体基类
+ * @createTime 2021-07-21 22:50:00
  */
 @Data
 public abstract class BaseMsg {

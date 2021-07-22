@@ -1,14 +1,12 @@
 package com.dongl.common.mq;
 
 /**
- * 消息处理器接口
- * <p>
- * 处理消息时，需要做幂等性处理，以防止同一条消息的重复消费<br/>
- * 多个业务同时消费一条消息时，请在不同的业务处理器中处理
- * </p>
- *
- * @param <M>BaseMsg 子类
- * @author maofengHan
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName MsgHandlerDispatcher.java
+ * @Description 消息处理器接口
+ *              处理消息时，需要做幂等性处理，以防止同一条消息的重复消费   多个业务同时消费一条消息时，请在不同的业务处理器中处理
+ * @createTime 2021-07-21 22:50:00
  */
 public interface MsgHandler<M extends BaseMsg> {
 
