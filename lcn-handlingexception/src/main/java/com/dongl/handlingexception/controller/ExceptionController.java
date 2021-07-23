@@ -20,8 +20,9 @@ public class ExceptionController {
     @GetMapping("/getExceptionMessage")
     public String getExceptionMessage(@RequestParam("exStatus") String exStatus){
         if ("YES".equalsIgnoreCase(exStatus)) {
-            throw new BusinessException(ErrorEnum.NOT_FOUND.getErrorCode() ,ErrorEnum.NOT_FOUND.getErrorMsg());
+            throw new BusinessException(ErrorEnum.NO_AUTH.getErrorCode() ,ErrorEnum.NO_AUTH.getErrorMsg() ,"获取异常接口");
         }
+        System.out.println("----------------------");
         return "ok";
     }
 
@@ -31,4 +32,10 @@ public class ExceptionController {
         return "do something you like ------";
     }
 
+    @GetMapping("/getMessage")
+    public String getMessage(){
+       int e = 1/0;
+        System.out.println("----------------------");
+        return "ok";
+    }
 }

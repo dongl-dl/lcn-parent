@@ -1,5 +1,10 @@
 package com.dongl.handlingexception.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 /**
  * @author D-L
  * @version 1.0.0
@@ -7,6 +12,10 @@ package com.dongl.handlingexception.exception;
  * @Description TODO
  * @createTime 2021-07-20 16:58:00
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class BusinessException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
@@ -19,28 +28,13 @@ public class BusinessException extends RuntimeException{
      */
     protected String errorMsg;
 
-    public BusinessException(){
-
-    }
+    /**
+     * 报错（微服务、类名、接口、方法）名称  示例：获取异常接口
+     */
+    protected String remark = "";
 
     public BusinessException(String errorCode, String errorMsg) {
         this.errorCode = errorCode;
-        this.errorMsg = errorMsg;
-    }
-
-    public String getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 }

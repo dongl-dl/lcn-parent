@@ -78,16 +78,15 @@ public class ResponseControllerAdvice {
     }
 
     /**
-     * 处理自定义异常
-     * @param exceptionMsg
+     * 业务异常
+     * @param e
      * @return
      */
     @ExceptionHandler(value = BusinessException.class)
-    public ResponseParams customExceptionsHandler(BusinessException exceptionMsg) {
-        String code = exceptionMsg.getErrorCode();
-        String msg = exceptionMsg.getErrorMsg();
-        ResponseParams<Object> responseParams = new ResponseParams<>("");
-        return responseParams.error(code ,msg);
+    public ResponseParams customExceptionsHandler(BusinessException e) {
+        ResponseParams<Object> responseParams = new ResponseParams<>(e.getRemark());
+        log.error("业务异常：{}", e.toString());
+        return responseParams.error(e.getErrorCode() ,e.getErrorMsg());
     }
 
     /**
@@ -98,7 +97,7 @@ public class ResponseControllerAdvice {
     @ExceptionHandler(Exception.class)
     public ResponseParams handleUnexpectedServer(Exception e) {
         ResponseParams<Object> responseParams = new ResponseParams<>();
-        log.error("系统异常：", e);
+        log.error("系统异常-----【Message】：{}  ， 【StackTrace】：{}", e.getMessage() , e.getStackTrace()[0]);
         return responseParams.error(ErrorEnum.INTERNAL_SERVER_ERROR.getErrorCode() ,ErrorEnum.INTERNAL_SERVER_ERROR.getErrorMsg());
     }
 
