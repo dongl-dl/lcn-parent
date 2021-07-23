@@ -4,17 +4,17 @@ package com.dongl.handlingexception.entity;
  * @author D-L
  * @version 1.0.0
  * @ClassName ErrorEnum.java
- * @Description TODO
+ * @Description 数据操作错误枚举类
  * @createTime 2021-07-20 16:07:00
  */
 public enum  ErrorEnum {
     // 数据操作错误定义
-    SUCCESS("200", "成功"),
-    NO_PERMISSION("403","你没得权限"),
     NO_AUTH("401","未登录"),
+    NO_PERMISSION("403","权限不足"),
     NOT_FOUND("404", "未找到该资源!"),
     INTERNAL_SERVER_ERROR("500", "服务器异常"),
-            ;
+    PARAMETER_MISSING_ERROR("20002", "参数缺失异常"),
+    PARAMETER_FORMAT_ERROR("500", "服务器异常");
 
     /** 错误码 */
     private String errorCode;
