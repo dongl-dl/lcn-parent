@@ -9,9 +9,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.98.119.49:3306/test?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username: ellabook
-    password: Ellabook@13579
+    url: jdbc:mysql://xxxxxx:3306/test?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: xxxxxx
+    password: xxxxxx
     dbcp2:
       initial-size: 5
       min-idle: 5
