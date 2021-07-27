@@ -32,5 +32,6 @@
         <module>lcn-rocketmq</module>
         <module>lcn-tm</module>
         <module>lcn-user</module>
+        <module>lcn-lock-redis</module>
     </modules>
 </project>

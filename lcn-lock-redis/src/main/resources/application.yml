@@ -1,0 +1,17 @@
+server:
+  port: 10012
+
+spring:
+  application:
+    name: lcn-lock-redis
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7900/eureka/
+
+redisson:
+  address: redis://127.0.0.1:6379
+  password: 961230
+  database: 1
+  timeout: 10000
