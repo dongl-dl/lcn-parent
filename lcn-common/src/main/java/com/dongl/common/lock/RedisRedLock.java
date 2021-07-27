@@ -9,7 +9,7 @@ import java.util.concurrent.locks.Condition;
  * @author D-L
  * @version 1.0.0
  * @ClassName RedisRedLock.java
- * @Description TODO
+ * @Description 封装单机版锁
  * @createTime 2021-07-27 14:13:00
  */
 public class RedisRedLock extends AbstractLock{

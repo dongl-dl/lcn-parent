@@ -6,8 +6,6 @@ import org.redisson.RedissonRedLock;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,12 +19,10 @@ import javax.annotation.Resource;
  * @createTime 2021-07-27 15:38:00
  */
 @Configuration
-@EnableConfigurationProperties(RedissonProperties.class)
 public class RedLockConfig {
 
     @Resource
     private RedissonProperties properties;
-
 
     public static RLock create(String url , String password , String key){
         Config config = new Config();
@@ -35,12 +31,10 @@ public class RedLockConfig {
         return redissonClient.getLock(key);
     }
 
-    RedissonRedLock redissonRedLock = new RedissonRedLock(
-            create(properties.getAddress() ,properties.getPassword() , "lock-key1")
-    );
-
     @Bean
     public RedisRedLock getRedLock() {
+        RLock rLock = create(properties.getAddress(), properties.getPassword(), "lock-key1");
+        RedissonRedLock redissonRedLock = new RedissonRedLock(rLock);
         RedisRedLock redLock = new RedisRedLock(redissonRedLock);
         return redLock;
     }

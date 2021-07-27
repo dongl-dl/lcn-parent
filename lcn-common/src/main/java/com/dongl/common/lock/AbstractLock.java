@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
  * @author D-L
  * @version 1.0.0
  * @ClassName AbstractLock.java
- * @Description TODO
+ * @Description 封装Lock
  * @createTime 2021-07-27 13:59:00
  */
 public abstract class AbstractLock implements Lock {
