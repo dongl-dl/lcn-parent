@@ -1,5 +1,6 @@
 package com.dongl.common.lock;
 
+import com.dongl.common.lock.AbstractLock;
 import org.redisson.RedissonRedLock;
 
 import java.util.concurrent.TimeUnit;
@@ -9,10 +10,10 @@ import java.util.concurrent.locks.Condition;
  * @author D-L
  * @version 1.0.0
  * @ClassName RedisRedLock.java
- * @Description 封装单机版锁
+ * @Description 封装红锁
  * @createTime 2021-07-27 14:13:00
  */
-public class RedisRedLock extends AbstractLock{
+public class RedisRedLock extends AbstractLock {
 
     private RedissonRedLock redLock;
 
@@ -25,6 +26,10 @@ public class RedisRedLock extends AbstractLock{
     @Override
     public void lock() {
         redLock.lock();
+    }
+
+    public void lock(long time, TimeUnit unit) {
+        redLock.lock(time, unit);
     }
 
     @Override

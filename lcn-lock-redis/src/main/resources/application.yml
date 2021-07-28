@@ -5,13 +5,29 @@ spring:
   application:
     name: lcn-lock-redis
 
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    password: 961230
+    database: 0
+    timeout: 2000
+
+#  redis:
+#    cluster:
+#      nodes: "192.168.31.176:6379,192.168.31.176:6380,192.168.31.176:6381"
+#    password: 961230
+#    lettuce:
+#      pool:
+#        max-active: 1500
+#        max-wait: 5000
+#        max-idle: 500
+#        min-idle: 100
+#        shutdown-timeout: 1000
+#    timeout: 60000
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:7900/eureka/
 
-redisson:
-  address: redis://127.0.0.1:6379
-  password: 961230
-  database: 1
-  timeout: 10000
+
