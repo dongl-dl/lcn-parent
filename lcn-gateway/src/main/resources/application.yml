@@ -71,3 +71,15 @@ spring:
                 key-resolver: "#{@ipKeyResolver}"
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 1
+
+        - id: lcn-lock-redis_route
+          uri: lb://LCN-LOCK-REDIS
+          predicates:
+            - Path=/api/redisson/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 10000
+                redis-rate-limiter.burstCapacity: 10000

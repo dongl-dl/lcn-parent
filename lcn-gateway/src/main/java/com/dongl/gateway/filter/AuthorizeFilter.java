@@ -1,6 +1,6 @@
 package com.dongl.gateway.filter;
 
-import com.dongl.gateway.utils.JwtUtil;
+import com.dongl.common.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;

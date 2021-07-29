@@ -59,7 +59,7 @@ public class UserController {
             info.put("success","SUCCESS");
             info.put("username",username);
             //生成令牌 过期时间单位为秒
-            String jwt = JwtUtil.createJWT(UUID.randomUUID().toString(), JSON.toJSONString(info),10L);
+            String jwt = JwtUtil.createJWT(UUID.randomUUID().toString(), JSON.toJSONString(info),null);
 
             //添加到cookie
             Cookie cookie = new Cookie("Authorization" , jwt);
