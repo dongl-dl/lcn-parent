@@ -38,11 +38,12 @@ public class LcnLockRedisApplication {
         return executor;
     }
 
-    @Bean
-    public Redisson redisson(){
-        Config config = new Config();
-        config.useSingleServer().setAddress("redis://127.0.0.1:6379").setPassword("961230").setDatabase(1);
-        Redisson redisson = (Redisson)Redisson.create(config);
-        return redisson;
-    }
+//    @Bean
+//    public Redisson redisson(){
+//        Config config = new Config();
+//        config.useSingleServer().setAddress("redis://127.0.0.1:6379").setPassword("961230").setDatabase(1);
+//        Redisson redisson = (Redisson)Redisson.create(config);
+//        return redisson;
+//    }
+
 }

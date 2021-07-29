@@ -5,6 +5,7 @@ import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @createTime 2021-07-28 14:19:00
  */
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/redisson")
 public class RedisLockController {
     private static String product1Count = "product1Count";//商品1的数量key
     private static String lockKey = "testLockKey";//分布式锁的key
@@ -36,7 +37,7 @@ public class RedisLockController {
      *
      * @return
      */
-    @RequestMapping("/set-product-count")
+    @GetMapping("/set-product-count")
     public String setValue() {
         redisTemplate.opsForValue().set(product1Count, "10");
         return "success";
@@ -47,7 +48,7 @@ public class RedisLockController {
      * 不加锁
      * @return
      */
-    @RequestMapping("/panic-buying")
+    @GetMapping("/panic-buying")
     public String panicBuying() {
         String flag = "success";
         try {
@@ -72,7 +73,7 @@ public class RedisLockController {
      * waitTime:获取锁等待时间 , leaseTime：锁的过期时间
      * @return
      */
-    @RequestMapping("/panic-buying-lock")
+    @GetMapping("/panic-buying-lock")
     public String panicBuyingLock() {
         String flag = "success";
         try {
@@ -97,11 +98,32 @@ public class RedisLockController {
     }
 
     /**
+     * 使用 synchronized (jvm锁) 如果你是单体应用  老铁你用jvm锁一点毛病都没有 ， 但是在分布式架构中一眼存在重复扣减的情况
+     * @return
+     */
+    @GetMapping("/deduct_stock")
+    public String deductStock(){
+        String flag = "success";
+
+        synchronized (this) {
+            int stock = Integer.parseInt(redisTemplate.opsForValue().get(product1Count)); //jedis.get(product1Count)
+            if (stock > 0) {
+                redisTemplate.opsForValue().set(product1Count, (stock - 1) + "");
+            } else {
+                flag = "fail";
+            }
+            System.out.println("result:" + flag + "-----" + stock);
+        }
+        return flag;
+    }
+
+
+    /**
      * 使用redis 的setNx (幼儿园级别的分布式锁)
      * @return
      */
-    @RequestMapping("/deduct_stock")
-    public String deductStock(){
+    @GetMapping("/deduct_stock_redis")
+    public String deductStockRedis(){
         String flag = "success";
         String lockKey = "P_001";
         String valueId = UUID.randomUUID().toString();
@@ -114,7 +136,7 @@ public class RedisLockController {
             //解决办法：value值设置唯一值 ， 释放锁之前判断是否为自己线程假的锁。
             Boolean result = redisTemplate.opsForValue().setIfAbsent(lockKey, valueId, 10, TimeUnit.SECONDS);
 
-            //这里会存在过期时间大小的设置问题， 解决办法：开启守护线程强行续命
+            //这里会存在过期时间大小的设置问题， 解决办法：开启守护线程强行续命(实现这一系列操作的框架叫做 redisson )
 
             if (!result) {
                 return "error";
@@ -128,6 +150,7 @@ public class RedisLockController {
             }
             System.out.println("result:" + flag + "-----" + stock);
         }finally {
+            //解决一个线程释放了不属于自己的锁，导致锁失效
             if(valueId.equals(redisTemplate.opsForValue().get(lockKey))){
                 //释放锁
                 redisTemplate.delete(lockKey);
@@ -140,7 +163,7 @@ public class RedisLockController {
      * 使用redisson单机模式实现分布式锁
      * @return
      */
-    @RequestMapping("/deduct_stock_redisson")
+    @GetMapping("/deduct_stock_redisson")
     public String deductStockRedisson(){
         String flag = "success";
         String lockKey = "P_001";
