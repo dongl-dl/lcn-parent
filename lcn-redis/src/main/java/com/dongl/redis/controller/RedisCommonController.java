@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/common")
 public class RedisCommonController {
 
-
     @Autowired
     private RedisUtil redisUtil;
 
@@ -27,7 +26,7 @@ public class RedisCommonController {
      * 设置缓存过期时间
      */
     @GetMapping("/testExpire")
-    public ResponseParams testExpire() throws Exception {
+    public ResponseParams testExpire() {
         ResponseParams responseParams = new ResponseParams("设置缓存过期时间");
         redisUtil.set("aaaKey", "aaaValue");
         redisUtil.expire("aaaKey", 10);
@@ -36,7 +35,7 @@ public class RedisCommonController {
     }
 
     @GetMapping("/testGetExpire")
-    public ResponseParams testGetExpire() throws Exception {
+    public ResponseParams testGetExpire()  {
         ResponseParams responseParams = new ResponseParams("获取指定缓存失效时间");
         redisUtil.set("aaaKey", "aaaValue");
         redisUtil.expire("aaaKey", 100);
@@ -46,7 +45,7 @@ public class RedisCommonController {
     }
 
     @GetMapping("/testHasKey")
-    public ResponseParams testHasKey() throws Exception {
+    public ResponseParams testHasKey() {
         ResponseParams responseParams = new ResponseParams("判断key是否存在");
         redisUtil.set("aaaKey", "aaaValue");
         // 存在的
@@ -57,7 +56,7 @@ public class RedisCommonController {
     }
 
     @GetMapping("/testDel")
-    public ResponseParams testDel() throws Exception {
+    public ResponseParams testDel() {
         ResponseParams responseParams = new ResponseParams("批量删除缓存");
         redisUtil.set("aaaKey", "aaaValue");
         redisUtil.set("bbbKey", "bbbValue");

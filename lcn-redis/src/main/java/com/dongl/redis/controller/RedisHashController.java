@@ -23,12 +23,9 @@ import java.util.Map;
 @RequestMapping("/hash")
 public class RedisHashController {
 
-
     @Autowired
     private RedisUtil redisUtil;
 
-
-    /*********************************Map***********************************/
     @GetMapping("/testHget")
     public ResponseParams testHget()  {
         ResponseParams responseParams = new ResponseParams("获取item对应的键值");

@@ -21,12 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/string")
 public class RedisStringController {
 
-
     @Autowired
     private RedisUtil redisUtil;
-
-
-    /*********************************String***********************************/
 
     @GetMapping("/testGet")
     public ResponseParams testGet(){

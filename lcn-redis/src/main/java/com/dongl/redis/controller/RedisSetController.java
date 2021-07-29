@@ -16,79 +16,64 @@ import java.util.concurrent.TimeUnit;
  * @author D-L
  * @version 1.0.0
  * @ClassName RedisController.java
- * @Description TODO
+ * @Description set
  * @createTime 2021-07-29 16:44:00
  */
 @RestController
 @RequestMapping("/set")
 public class RedisSetController {
 
-
     @Autowired
     private RedisUtil redisUtil;
 
-    /**
-     * 设置缓存过期时间
-     */
-    @GetMapping("/testExpire")
-    public ResponseParams testExpire() throws Exception {
-        ResponseParams responseParams = new ResponseParams("设置缓存过期时间");
-        redisUtil.set("aaaKey", "aaaValue");
-        redisUtil.expire("aaaKey", 10);
-        Object aaaValue = redisUtil.get("aaaKey");
-        return responseParams.success("20001" , aaaValue);
-    }
-
-
-
-    /*********************************Set***********************************/
-    @GetMapping("/testExpire")
-    public void testSGet() throws Exception {
+    @GetMapping("/testSGet")
+    public ResponseParams testSGet() {
+        ResponseParams responseParams = new ResponseParams("根据key获取Set中的所有值");
         redisUtil.sSet("testSGet", "testSGet1");
         redisUtil.sSet("testSGet", "testSGet2");
         Set<Object> testSGet = redisUtil.sGet("testSGet");
-        System.err.println(StringUtils.join(testSGet, ","));
+        return responseParams.success("20001" , StringUtils.join(testSGet, ","));
     }
 
-    @GetMapping("/testExpire")
-    public void testSHasKey() throws Exception {
+    @GetMapping("/testSHasKey")
+    public ResponseParams testSHasKey() {
+        ResponseParams responseParams = new ResponseParams("根据value从一个set中查询,是否存在");
         redisUtil.sSet("testSHasKey", "value1");
         redisUtil.sSet("testSHasKey", "value2");
         redisUtil.sSet("testSHasKey", "value3");
-        System.err.println(redisUtil.sHasKey("testSHasKey", "value2"));
+        return responseParams.success("20001" , redisUtil.sHasKey("testSHasKey", "value2"));
 
     }
 
-    @GetMapping("/testExpire")
-    public void testSSet() throws Exception {
+    @GetMapping("/testSSet")
+    public ResponseParams testSSet() {
+        ResponseParams responseParams = new ResponseParams("将数据批量放入set缓存");
         redisUtil.sSet("testSSet", "a" , "b" , "c" , "d" , "e");
-        System.out.println(redisUtil.sGet("testSSet"));
+        return responseParams.success("20001" , redisUtil.sGet("testSSet"));
     }
 
-    @GetMapping("/testExpire")
-    public void testSSetAndTime() throws Exception {
+    @GetMapping("/testSSetAndTime")
+    public ResponseParams testSSetAndTime() {
+        ResponseParams responseParams = new ResponseParams("将set数据放入缓存、设置缓存过期时间");
         redisUtil.sSetAndTime("testSSetAndTime", 20, "testSSetAndTime1");
-        System.err.println(StringUtils.join(redisUtil.sGet("testSSetAndTime"), ","));
         redisUtil.sSetAndTime("testSSetAndTime", 5, "testSSetAndTime2");
-        System.err.println(StringUtils.join(redisUtil.sGet("testSSetAndTime"), ","));
-        TimeUnit.SECONDS.sleep(5);
-        System.err.println(StringUtils.join(redisUtil.sGet("testSSetAndTime"), ",-----"));
+        return responseParams.success("20001" , StringUtils.join(redisUtil.sGet("testSSetAndTime"), ","));
     }
 
-    @GetMapping("/testExpire")
-    public void testSGetSetSize() throws Exception {
+    @GetMapping("/testSGetSetSize")
+    public ResponseParams testSGetSetSize() {
+        ResponseParams responseParams = new ResponseParams("获取set缓存的长度");
         redisUtil.sSetAndTime("testSGetSetSize", 20, "testSGetSetSize1");
         redisUtil.sSetAndTime("testSGetSetSize", 5, "testSGetSetSize");
-        System.err.println(redisUtil.sGetSetSize("testSGetSetSize"));
+        return responseParams.success("20001" , redisUtil.sGetSetSize("testSGetSetSize"));
     }
 
-    @GetMapping("/testExpire")
-    public void testSetRemove() throws Exception {
+    @GetMapping("/testSetRemove")
+    public ResponseParams testSetRemove() {
+        ResponseParams responseParams = new ResponseParams("set 移除值为value的");
         redisUtil.sSetAndTime("testSetRemove", 20, "testSetRemove1");
         redisUtil.sSetAndTime("testSetRemove", 5, "testSetRemove");
-        System.out.println(redisUtil.sGetSetSize("testSetRemove"));
         redisUtil.setRemove("testSetRemove", "testSetRemove");
-        System.out.println(redisUtil.sGetSetSize("testSetRemove"));
-
+        return responseParams.success("20001" , redisUtil.sGetSetSize("testSetRemove"));
     }
 }
