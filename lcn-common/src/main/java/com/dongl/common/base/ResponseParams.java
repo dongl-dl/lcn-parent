@@ -1,4 +1,4 @@
-package com.dongl.common.request;
+package com.dongl.common.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,6 +45,13 @@ public class ResponseParams<T> implements Serializable {
         this.status = "1";
         this.message ="【调用成功】";
         this.code = code;
+        this.data = data;
+        return this;
+    }
+    public  ResponseParams success( T data){
+        this.status = "1";
+        this.message ="【调用成功】";
+        this.code = "200";
         this.data = data;
         return this;
     }

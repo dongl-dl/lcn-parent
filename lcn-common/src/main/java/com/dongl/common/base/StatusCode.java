@@ -1,4 +1,4 @@
-package com.dongl.common.request;
+package com.dongl.common.base;
 
 /**
  * @author D-L

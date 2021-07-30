@@ -1,6 +1,6 @@
 package com.dongl.redis.controller;
 
-import com.dongl.common.request.ResponseParams;
+import com.dongl.common.base.ResponseParams;
 import com.dongl.redis.entrity.TestModel;
 import com.dongl.redis.utils.RedisUtil;
 
