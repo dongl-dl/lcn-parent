@@ -15,9 +15,11 @@ import java.util.concurrent.TimeUnit;
  * @author D-L
  * @version 1.0.0
  * @ClassName RedisUtil.java
- * @Description redis工具类 不含通用方法  针对所有的hash 都是以h开头的方法
- *                                     针对所有的Set 都是以s开头的方法
- *                                     针对所有的List 都是以l开头的方法
+ * @Description    redis工具类  (这里只是列举常用的api)
+ *                 不含通用方法  针对所有的hash 都是以h开头的方法
+ *                             针对所有的Set  都是以s开头的方法
+ *                             针对所有的List 都是以l开头的方法
+ *                             针对所有的zSet 都是以zS开头的方法
  * @createTime 2021-07-29 15:06:00
  */
 @Component
@@ -466,104 +468,124 @@ public class RedisUtil {
     /*********************************ZSet***********************************/
 
     /**
-     * 根据key获取Set中的所有值
-     *
-     * @param key
-     *            键
-     * @return
-     */
-    public Set<Object> zSGet(String key) {
-        try {
-            return redisTemplate.opsForSet().members(key);
-        } catch (Exception e) {
-            log.error(key, e);
-            return null;
-        }
-    }
-
-    /**
-     * 根据value从一个set中查询,是否存在
+     * 增加有序集合
      *
      * @param key
      *            键
      * @param value
      *            值
-     * @return true 存在 false不存在
-     */
-    public boolean zSHasKey(String key, Object value) {
-        try {
-            return redisTemplate.opsForSet().isMember(key, value);
-        } catch (Exception e) {
-            log.error(key, e);
-            return false;
-        }
-    }
-
-    public Boolean zSSet(String key, Object value, double score) {
-        try {
-            return redisTemplate.opsForZSet().add(key, value, 2);
-        } catch (Exception e) {
-            log.error(key, e);
-            return false;
-        }
-    }
-
-    /**
-     * 将set数据放入缓存
-     *
-     * @param key
-     *            键
-     * @param time
-     *            时间(秒)
-     * @param values
-     *            值 可以是多个
-     * @return 成功个数
-     */
-    public long zSSetAndTime(String key, long time, Object... values) {
-        try {
-            Long count = redisTemplate.opsForSet().add(key, values);
-            if (time > 0)
-                expire(key, time);
-            return count;
-        } catch (Exception e) {
-            log.error(key, e);
-            return 0;
-        }
-    }
-
-    /**
-     * 获取set缓存的长度
-     *
-     * @param key
-     *            键
+     * @param seqNo
+     *            序号（用来排序）
      * @return
      */
-    public long zSGetSetSize(String key) {
+    public boolean zSSet(String key, Object value, double seqNo) {
         try {
-            return redisTemplate.opsForSet().size(key);
+            return redisTemplate.opsForZSet().add(key, value, seqNo);
         } catch (Exception e) {
-            log.error(key, e);
-            return 0;
+            log.error("[RedisUtil.addZset] [error]", e);
+            return false;
         }
     }
 
     /**
-     * 移除值为value的
+     * 获取zset指定范围内的集合
      *
      * @param key
-     *            键
-     * @param values
-     *            值 可以是多个
-     * @return 移除的个数
+     *           键
+     * @param start
+     *           范围开始
+     * @param end
+     *           范围结束
+     * @return
      */
-    public long zSetRemove(String key, Object... values) {
+    public Set<Object> zSRange(String key, long start, long end) {
         try {
-            Long count = redisTemplate.opsForSet().remove(key, values);
-            return count;
+            return redisTemplate.opsForZSet().range(key, start, end);
         } catch (Exception e) {
-            log.error(key, e);
-            return 0;
+            log.error("[RedisUtil.rangeZset] [error] [key is {},start is {},end is {}]", key, start, end, e);
+            return null;
         }
+    }
+
+    /**
+     * 获取zset集合数量
+     *
+     * @param key
+     *         键
+     * @return
+     */
+    public Long zSSize(String key) {
+        try {
+            return redisTemplate.opsForZSet().size(key);
+        } catch (Exception e) {
+            log.error("[RedisUtil.countZset] [error] [key is {}]", key, e);
+            return 0L;
+        }
+    }
+
+    /**
+     * 根据key和value移除指定元素
+     * 未查询到对应的key和value，返回0，否则返回1
+     * @param key
+     *          键
+     * @param value
+     *          值
+     * @return
+     */
+    public Long zSRemove(String key, Object... values) {
+        return redisTemplate.opsForZSet().remove(key, values);
+    }
+
+    /**
+     * 获取对应key和value的score
+     *
+     * @param key
+     *          键
+     * @param value
+     *          值
+     * @return
+     */
+    public Double zSScore(String key, Object value) {
+        return redisTemplate.opsForZSet().score(key, value);
+    }
+
+    /**
+     * 指定范围内元素排序
+     * 从排序集中获取分数在 {@code min} 和 {@code max} 之间的元素
+     *
+     * @param key
+     *          键
+     * @param min
+     *          排序最小值
+     * @param max
+     *          排序最大值
+     * @return
+     */
+    public Set<Object> zSRangeByScore(String key, double min, double max) {
+        return redisTemplate.opsForZSet().rangeByScore(key, min, max);
+    }
+
+    /**
+     * 指定元素增加指定分数
+     * 用 {@code value} 在 sorted set by {@code increment} 中增加元素的分数。  如果value不存在 会自动添加
+     * @param key
+     * @param value
+     * @param score
+     * @return
+     */
+    public Object zSIncrementScore(String key, Object value, double score) {
+        return redisTemplate.opsForZSet().incrementScore(key, value, score);
+    }
+
+    /**
+     * 排名  确定排序集中具有 {@code value} 的元素的索引。
+     *
+     * @param key
+     * @param obj
+     * @return
+     */
+    public Object zSRank(String key, Object value) {
+        return redisTemplate.opsForZSet().rank(key, value);
     }
 
     /*********************************List***********************************/
