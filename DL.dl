@@ -1,23 +1,28 @@
-精通java核心API，具有三年的一线开发经验，能够快速的使用（SpringBoot、SpringCloud）构建项目、解决常见业务场景，具备良好的编码能力,熟悉常见的设计模式；
+精通java核心API，具有三年的一线开发经验，能够快速的使用（SpringBoot、SpringCloud）构建项目、解决常见业务场景，具备良好的编码能力,熟悉常见的设计模式;
 精通sql语言与mysql数据库调优，对索引优化、存储引擎有一定的理解,熟悉 myCat、shardingSphere;
-精通zookeeper底层原理、实现机制，了解Paxos、zab算法，对CAP定理有一定的理解；
-熟练掌握Redis了解底层磁盘及网络IO模型、数据持久化机制、多数据类型缓存应用、缓存击穿 缓存击透 缓存雪崩产生的原因和解决方案;
-
+熟悉JVM、对类的初始化、JMM模型、运行时数据区、常见垃圾回收算法、垃圾回收器有一定的了解、熟悉JVM调优，有实战经验;
+熟悉zookeeper底层原理、实现机制，了解Paxos、zab算法，对CAP定理有一定的理解;
+熟练掌握Redis了解底层磁盘及网络IO模型，数据持久化机制、熟悉各种数据类型缓存应用，熟悉缓存击穿 缓存击透 缓存雪崩产生的原因和解决方案;
+熟悉多线程与高并发，对线程池、synchronized的锁升级、volatile关键字、AQS、ThreadLocal有一定的理解;
 
-熟练掌握 多线程、java并发编程，了解操作系统底层多任务调度原理；
-熟练使用Spring 、SpringMvc 、MyBatis、SpringBoot等框架；
-熟悉基于 SpringCloud  的微服务搭建与开发，包括其组件：Eureka 、Zuul 、Feign 、Ribbon 、Hystrix 等； 
-熟悉Spring的IOC、AOP设计思想；
-熟练掌握Redis了解底层磁盘及网络IO模型、数据持久化机制、多数据类型缓存应用、缓存击穿 缓存击透 缓存雪崩产生的原因和解决方案，了解 分布式锁 集群配置，哨兵机制工作经历；
-熟练掌握MySql、异步/半同步复制、MHA、MMM等高可用架构；
-熟练掌握ActiveMQ、RocketMQ、Kafka等消息中间件及集群部署；
+mq rocketmq rabbitmq activemq kafka
+fastdfs oss
+Elasticsearch
+
+熟悉基于 SpringCloud 的微服务搭建与开发，包括其组件：Eureka 、Zuul 、gateway、Feign 、Ribbon 、Hystrix 等;
+熟练使用分布式锁(mysql、Redisson、redLock、zookeeper);
+熟悉分布式事务解决方案(基于事件表、tx-lcn、seata);
+skywalking
+
+
+熟练使用Spring 、SpringMvc 、MyBatis、SpringBoot等框架;
+
+
+
 熟练掌握IDEA、Svn、Git、Maven等开发及版本控制工具；
-熟悉JVM、对类的初始化、JMM模型、运行时数据区、常见垃圾回收算法、垃圾回收器有一定的了解、熟悉JVM调优，有实战经验；
-熟悉 mycat、shardingsphere；
 熟悉Linux操作系统，熟练使用常用命令；
 熟悉Docker、k8s容器化部署；
-熟悉Elasticsearch、Logstash、Kibana搭建ELK日志收集系统；
-熟悉Nginx、KeepAlived、zookeeper、LVS等负载均衡组件，熟悉高可用、分布式锁、分布式系统常见解决方案；
+熟悉Nginx、KeepAlived、LVS等负载均衡组件，熟悉高可用、分布式锁、分布式系统常见解决方案；
 了解Java网络编程、操作系统异步网络IO，Java NIO，对Netty有一定的理解；
 了解dubbo及相关RPC框架的原理；
 了解TCP/IP协议栈、http、https协议实现；
