@@ -1,4 +1,4 @@
-精通java核心API，具有三年的一线开发经验，能够快速的使用（SpringBoot、SpringCloud）构建项目、解决常见业务场景，具备良好的编码能力,熟悉常见的设计模式;
+精通java核心API，具有三年的一线开发经验，能够快速的使用（SpringBoot、SpringCloud、MyBatis）构建项目、解决常见业务场景，具备良好的编码能力,熟悉常见的设计模式;
 精通sql语言与mysql数据库调优，对索引优化、存储引擎有一定的理解,熟悉 myCat、shardingSphere;
 熟悉JVM、对类的初始化、JMM模型、运行时数据区、常见垃圾回收算法、垃圾回收器有一定的了解、熟悉JVM调优，有实战经验;
 熟悉zookeeper底层原理、实现机制，了解Paxos、zab算法，对CAP定理有一定的理解;
@@ -9,20 +9,21 @@
 fastdfs oss
 Elasticsearch
 
-熟悉基于 SpringCloud 的微服务搭建与开发，包括其组件：Eureka 、Zuul 、gateway、Feign 、Ribbon 、Hystrix 等;
+熟悉基于 SpringCloud、SpringCloudAlibaba的微服务搭建与开发，包括其组件：Eureka 、Zuul 、gateway、Feign 、Ribbon 、Hystrix 等;
 熟练使用分布式锁(mysql、Redisson、redLock、zookeeper);
 熟悉分布式事务解决方案(基于事件表、tx-lcn、seata);
 skywalking
 
-
-熟练使用Spring 、SpringMvc 、MyBatis、SpringBoot等框架;
-
-
-
-熟练掌握IDEA、Svn、Git、Maven等开发及版本控制工具；
-熟悉Linux操作系统，熟练使用常用命令；
+熟悉Nginx、KeepAlived、LVS等负载均衡组件，熟悉高可用、分布式系统常见解决方案;
 熟悉Docker、k8s容器化部署；
-熟悉Nginx、KeepAlived、LVS等负载均衡组件，熟悉高可用、分布式锁、分布式系统常见解决方案；
+熟悉Linux操作系统，熟练使用常用命令；
+熟练掌握IDEA、Svn、Git、Maven等开发及版本控制工具；
+
+
+
+
+
+
 了解Java网络编程、操作系统异步网络IO，Java NIO，对Netty有一定的理解；
 了解dubbo及相关RPC框架的原理；
 了解TCP/IP协议栈、http、https协议实现；

@@ -76,4 +76,19 @@ public class RedisStringController {
         return responseParams.success("20001", redisUtil.get(key));
     }
 
+
+    @GetMapping("/getAndSet")
+    public ResponseParams getAndSet() {
+        ResponseParams responseParams = new ResponseParams("");
+        Object andSet = redisUtil.getAndSet("dongl", "dongliang");
+        return responseParams.success("20001", andSet);
+    }
+
+    @GetMapping("/append")
+    public ResponseParams append() {
+        ResponseParams responseParams = new ResponseParams("");
+        redisUtil.append("dongl1", "dl");
+        return responseParams.success("20001", null);
+    }
+
 }

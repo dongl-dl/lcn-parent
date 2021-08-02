@@ -96,16 +96,6 @@ public class RedisUtil {
     }
 
     /*********************************String***********************************/
-    /**
-     * 普通缓存获取
-     *
-     * @param key
-     *            键
-     * @return 值
-     */
-    public Object get(String key) {
-        return key == null ? null : redisTemplate.opsForValue().get(key);
-    }
 
     /**
      * 普通缓存放入
@@ -153,7 +143,163 @@ public class RedisUtil {
     }
 
     /**
-     * 递增 适用场景： 高并发生成订单号，秒杀类的业务逻辑等。。
+     * 普通缓存获取
+     *
+     * @param key
+     *            键
+     * @return 值
+     */
+    public Object get(String key) {
+        try {
+            return redisTemplate.opsForValue().get(key);
+        }catch (Exception e) {
+            log.error("[RedisUtil.get] [error] [key is {} ,e is {}]", key , e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * 下标索引缓存获取
+     * 获取 {@code begin} 和 {@code end} 之间的 {@code key} 值的子串
+     *
+     * @param key
+     *            键
+     * @return 值
+     */
+    public Object getRange(String key ,long start, long end) {
+        try {
+            return redisTemplate.opsForValue().get(key, start, end);
+        }catch (Exception e) {
+            log.error("[RedisUtil.getRange] [error] [key is {}, [start is {},end is {},e is {}]", key , start , end , e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     *
+     * 将 value} 附加到 key
+     *
+     * @param key
+     *         键
+     * @param value
+     *         值
+     */
+    public Integer append(String key ,String value){
+        try {
+            return redisTemplate.opsForValue().append(key, value);
+        } catch (Exception e) {
+            log.error("[RedisUtil.append] [error] [key is {},value is {},e is {}]", key,value , e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * 设置key的 value 并返回其旧值 , 如果key不存在 设置value，返回旧值为null
+     * @param key
+     *          键
+     * @param value
+     *          值
+     */
+    public Object getAndSet(String key ,Object value){
+        try {
+            return redisTemplate.opsForValue().getAndSet(key, value);
+        } catch (Exception e) {
+            log.error("[RedisUtil.getAndSet] [error] [key is {},value is {},e is {}]", key,value , e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * 如果不存在key，则设置 保存字符串 value
+     * @param key
+     *          键
+     * @param value
+     *          值
+     */
+    public Boolean setIfAbsent(String key ,Object value){
+        try {
+            return redisTemplate.opsForValue().setIfAbsent(key, value);
+        } catch (Exception e) {
+            log.error("[RedisUtil.setIfAbsent] [error] [key is {},value is {},e is {}]", key,value , e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * 如果key不存在 ，设置缓存和到期时间
+     *
+     * @param key
+     *          键
+     * @param value
+     *          值
+     * @param timeout
+     *           过期时间
+     * @param unit
+     *           单位
+     */
+    public Boolean setIfAbsentExpiration(String key ,Object value ,long timeout, TimeUnit unit){
+        try {
+            return redisTemplate.opsForValue().setIfAbsent(key, value , timeout, unit);
+        } catch (Exception e) {
+            log.error("[RedisUtil.setIfAbsentExpiration] [error] [key is {},value is {},e is {}]", key,value , e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * 如果存在 key，则设置保存字符串 value
+     * @param key
+     *          键
+     * @param value
+     *          值
+     */
+    public Boolean setIfPresent(String key ,Object value){
+        try {
+            return redisTemplate.opsForValue().setIfPresent(key , value);
+        } catch (Exception e) {
+            log.error("[RedisUtil.setIfPresent] [error] [key is {},value is {},e is {}]", key,value , e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * 如果存在 key，则设置保存字符串和到期时间
+     * @param key
+     *           键
+     * @param value
+     *           值
+     * @param timeout
+     *           过期时间
+     * @param unit
+     *           单位
+     */
+    public Boolean setIfPresentExpiration(String key ,Object value ,long timeout, TimeUnit unit){
+        try {
+           return redisTemplate.opsForValue().setIfPresent(key, value , timeout, unit);
+        } catch (Exception e) {
+            log.error("[RedisUtil.setIfPresentExpiration] [error] [key is {},value is {},e is {}]", key,value , e.getMessage());
+            return false;
+        }
+    }
+
+
+    /**
+     * 获取存储在key中的值的长度
+     *
+     * @param key   键
+     */
+    public Long size(String key) {
+        try {
+            return redisTemplate.opsForValue().size(key);
+        } catch (Exception e) {
+            log.error("[RedisUtil.size] [error] [key is {},e is {}]", key, e);
+            return null;
+        }
+    }
+
+    /**
+     * 递增 适用场景： 高并发生成订单号，秒杀类的业务逻辑等。
+     * 通过delta 递增 key 下存储为字符串值的整数值
      *
      * @param key
      *            键
@@ -161,7 +307,7 @@ public class RedisUtil {
      *            要增加几(大于0)
      * @return
      */
-    public long incr(String key, long delta) {
+    public Long incr(String key, long delta) {
         if (delta < 0) {
             throw new RuntimeException("递增因子必须大于0");
         }
@@ -169,7 +315,7 @@ public class RedisUtil {
     }
 
     /**
-     * 递减
+     * 将 key下存储为字符串值的整数值递减 delta
      *
      * @param key
      *            键
@@ -177,11 +323,11 @@ public class RedisUtil {
      *            要减少几(小于0)
      * @return
      */
-    public long decr(String key, long delta) {
+    public Long decr(String key, long delta) {
         if (delta < 0) {
             throw new RuntimeException("递减因子必须大于0");
         }
-        return redisTemplate.opsForValue().increment(key, -delta);
+        return redisTemplate.opsForValue().decrement(key, delta);
     }
 
     /*********************************Map***********************************/
