@@ -2,7 +2,7 @@
 精通sql语言与mysql数据库调优，对索引优化、存储引擎有一定的理解,熟悉 myCat、shardingSphere;
 精通zookeeper底层原理、实现机制，了解Paxos、zab算法，对CAP定理有一定的理解；
 熟练掌握Redis了解底层磁盘及网络IO模型、数据持久化机制、多数据类型缓存应用、缓存击穿 缓存击透 缓存雪崩产生的原因和解决方案;
-
+测试git冲突
 
 熟练掌握 多线程、java并发编程，了解操作系统底层多任务调度原理；
 熟练使用Spring 、SpringMvc 、MyBatis、SpringBoot等框架；
