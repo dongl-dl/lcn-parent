@@ -73,3 +73,10 @@ async:
       keepAliveSeconds: 60
       name:
         prefix: async-service-user_
+
+logging:
+  level:
+    root: info
+    com.dl.user.mapper: DEBUG
+    org.springframework.web: ERROR
+    org.springframework: ERROR

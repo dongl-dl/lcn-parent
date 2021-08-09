@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -29,7 +30,10 @@ public class RedisHashController {
     @GetMapping("/testHget")
     public ResponseParams testHget()  {
         ResponseParams responseParams = new ResponseParams("获取item对应的键值");
-        redisUtil.hset("testHget", "dongl", "456123");
+        redisUtil.hset("ellacloud01", "dongl", "456123");
+        redisUtil.hset("ellacloud01", "dongl", "456123");
+        redisUtil.hset("ellacloud01", "dongl01", "456123");
+        redisUtil.hset("ellacloud01", "dongl01", "dfgfdgdfg");
         Object hget = redisUtil.hget("testHget", "dongl");
         return responseParams.success("20001", hget);
     }
@@ -96,6 +100,21 @@ public class RedisHashController {
         System.err.println(redisUtil.hincr("testHincr", "testHincr", 1));
         double hincr = redisUtil.hincr("testHincr", "testHincr", 1);
         return responseParams.success("20001", hincr);
+    }
+
+    @GetMapping("/testHmset")
+    public ResponseParams testHmset() {
+        ResponseParams responseParams = new ResponseParams("批量设置");
+        String uid = "U202190901921";
+        String appCode = "APP202189123801";
+        String key = String.format("%s%s:%s", "SHOPPING:CART:" , uid , appCode);
+        Map<String , Object> map = new HashMap<>(12);
+        map.put("B202101" , 1);
+        map.put("B202102" , 2);
+        map.put("B202103" , 5);
+        redisUtil.hmset(key, map);
+        Map<Object, Object> hmget = redisUtil.hmget(key);
+        return responseParams.success("20001", hmget);
     }
 
 }
