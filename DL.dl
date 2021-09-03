@@ -12,6 +12,8 @@
 熟悉基于 SpringCloud、SpringCloudAlibaba的微服务搭建与开发，包括其组件：Eureka 、Zuul 、gateway、Feign 、Ribbon 、Hystrix 等;
 熟练使用分布式锁(mysql、Redisson、redLock、zookeeper);
 熟悉分布式事务解决方案(基于事件表、tx-lcn、seata);
+
+
 skywalking
 
 熟悉Nginx、KeepAlived、LVS等负载均衡组件，熟悉高可用、分布式系统常见解决方案;
@@ -20,10 +22,55 @@
 熟练掌握IDEA、Svn、Git、Maven等开发及版本控制工具；
 
 
-
-
-
-
 了解Java网络编程、操作系统异步网络IO，Java NIO，对Netty有一定的理解；
 了解dubbo及相关RPC框架的原理；
 了解TCP/IP协议栈、http、https协议实现；
+
+
+个人博客地址：https://www.cnblogs.com/dongl961230/
+
+
+
+
+
+
+
+
+
+
+
+
+1、项目名称:
+咿啦智云SaaS平台
+
+2、项目描述:
+a)这是一个通过阅读器SDK嵌入合作客户APP内的方案，让合作客户APP用户采用年租或单笔扣费的形式，付费订阅我们的动画书内容，从而形成一种新的内容变现形式，
+该需求是以SaaS形式在PC端通过浏览器向B端客户提供主要服务，最终实现账户注册、SDK下载、应用管理、内容选择、订单、账户余额、消费明细都可以在线管理和查看。
+b)本项目主要致力于帮助目标用户快速了解SDK配置方法、计费规则；查看使用内容和产生的订单，项目自上线以来已经接入的三方平台有叫叫、开心鼠、天童、荷小鱼、学大等几十家阅读平台。
+
+3、技术描述
+a) SpringCloud+GateWay+Redis+AliyunOss+RocketMq+Mysql+Nginx
+
+4、职责描述
+a)参与需求设计，项目搭建，数据库设计
+b)参与了用户模块、订单模块的编写，完成了注册、登录功能、书城（在线选书、加入购物车、付款），此功能使用redis、阿里云短信平台、jwt等技术完成
+
+5、个人业绩、项目难点（可以写可以不写，但是要求必须要准备几个点）
+a)项目优化mysql，jvm,tomcat
+b)项目重构的问题
+c)日志，监控方面的问题
+
+
+1、项目名称:
+咿啦看书App
+
+2、项目描述:
+a)
+b)
+
+3、技术描述
+a) SpringCloud+GateWay+Redis+AliyunOss+ES+RocketMq+Mysql+Nginx
+
+4、职责描述
+a)参与版本迭代中的需求设计，数据库设计
+b)
