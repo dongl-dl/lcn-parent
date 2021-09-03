@@ -121,12 +121,46 @@ public class ErrorCode {
     public static final String SIGN_ERROR_REQUEST_REPEAT_DESC = "请勿重复提交";
 
 
-    public static void main(String[] args) {
-        BigDecimal goodsPrice = new BigDecimal("0.001");
-        int result = goodsPrice.compareTo(new BigDecimal("0"));
-        System.out.println(result);
-        goodsPrice = new BigDecimal("0.000");
-        result = goodsPrice.compareTo(new BigDecimal("0"));
-        System.out.println(result);
-    }
+    /**************全局异常处理**********************/
+    /**参数格式不合法 Invalid parameter format*/
+    public static final String INVALID_PARAMETER_FORMAT_CODE = "100000001";
+    public static final String INVALID_PARAMETER_FORMAT_DESC = "参数格式不合法";
+
+    /**权限不足异常 Insufficient permissions exception*/
+    public static final String INSUFFICIENT_PERMISSIONS_EXCEPTION_CODE = "100000002";
+    public static final String INSUFFICIENT_PERMISSIONS_EXCEPTION_DESC = "权限不足异常";
+
+    /**参数缺失 Missing parameters*/
+    public static final String MISSING_PARAMETERS_CODE = "100000003";
+    public static final String MISSING_PARAMETERS_DESC = "参数缺失";
+
+    /**系统异常 System abnormal*/
+    public static final String SYSTEM_EXCEPTION_CODE = "100000003";
+    public static final String SYSTEM_EXCEPTION_DESC = "系统异常";
+
+
+    /**************业务异常**********************/
+    /**添加购物车失败 */
+    public static final String CART_ADD_ERROR_CODE = "200000001";
+    public static final String CART_ADD_ERROR_DESC = "添加购物车失败";
+
+    /**添加图书商品到购物车 */
+    public static final String BOOK_CODE_NULL_CODE = "200000002";
+    public static final String BOOK_CODE_NULL_DESC = "图书编码不能为空";
+
+    /**从缓存中获取购物车信息失败 */
+    public static final String GET_CART_FAILED_CODE = "200000003";
+    public static final String GET_CART_FAILED_DESC = "获取购物车商品信息失败";
+
+    /**批量移除购物车失败 */
+    public static final String REMOVE_CART_FAILED_CODE = "200000004";
+    public static final String REMOVE_CART_FAILED_DESC = "批量移除购物车失败";
+
+    /**内容使用失败 */
+    public static final String CONTENT_USAGE_FAILED_CODE = "200000005";
+    public static final String CONTENT_USAGE_FAILED_DESC = "内容使用失败";
+
+    /**购物车商品为空 */
+    public static final String CART_NULL_ERROR_CODE = "200000006";
+    public static final String CART_NULL_ERROR_DESC = "购物车商品为空";
 }

@@ -34,5 +34,7 @@
         <module>lcn-user</module>
         <module>lcn-lock-redis</module>
         <module>lcn-redis</module>
+        <module>lcn-goods</module>
+        <module>lcn-aliyun-oss</module>
     </modules>
 </project>

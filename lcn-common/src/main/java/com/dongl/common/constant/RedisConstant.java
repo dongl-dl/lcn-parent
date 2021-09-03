@@ -27,4 +27,9 @@ public class RedisConstant {
      * 账户余额
      */
     public static final String REDIS_ACCOUNT_BALANCE = "ACCOUNT:BALANCE:";
+
+    /**
+     * 内容商城购物车
+     */
+    public static final String REDIS_SHOPPING_CART = "SHOPPING:CART:";
 }
