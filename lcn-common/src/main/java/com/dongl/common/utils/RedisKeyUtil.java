@@ -7,23 +7,18 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * The class Redis key util.
- *
- * @author paascloud.net@gmail.com
- */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RedisKeyUtil {
 
 	/**
 	 * The constant RESET_PWD_TOKEN_KEY.
 	 */
-	private static final String RESET_PWD_TOKEN_KEY = "paascloud:restPwd";
-	private static final String ACTIVE_USER = "paascloud:activeUser";
-	private static final String SEND_SMS_COUNT = "paascloud:sms:count";
-	private static final String SEND_EMAIL_CODE = "paascloud:email:code";
-	private static final String ACCESS_TOKEN = "paascloud:token:accessToken";
-	private static final String UPLOAD_FILE_SIZE = "paascloud:file:upload_file_size";
+	private static final String RESET_PWD_TOKEN_KEY = "lcn:restPwd";
+	private static final String ACTIVE_USER = "lcn:activeUser";
+	private static final String SEND_SMS_COUNT = "lcn:sms:count";
+	private static final String SEND_EMAIL_CODE = "lcn:email:code";
+	private static final String ACCESS_TOKEN = "lcn:token:accessToken";
+	private static final String UPLOAD_FILE_SIZE = "lcn:file:upload_file_size";
 	private static final int REF_NO_MAX_LENGTH = 100;
 
 	/**

@@ -1,5 +1,3 @@
-
-
 package com.dongl.common.utils;
 
 
@@ -10,11 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * The class Validate util.
- *
- * @author paascloud.net @gmail.com
- */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ValidateUtil {
 	/**

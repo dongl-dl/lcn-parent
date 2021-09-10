@@ -10,11 +10,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * The class Tree util.
- *
- * @author paascloud.net@gmail.com
- */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TreeUtil {
 	/**

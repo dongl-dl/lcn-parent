@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 /**
- * The class Check file util.
- *
- * @author paascloud.net@gmail.com
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName CheckFileUtil.java
+ * @Description 检查校验文件类型
+ * @createTime 2021-09-09 09:46:00
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CheckFileUtil {

@@ -14,9 +14,11 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.MessageDigest;
 
 /**
- * The class Http aes util.
- *
- * @author paascloud.net@gmail.com
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName HttpAesUtil.java
+ * @Description HttpAes 加密
+ * @createTime 2021-07-19 17:46:00
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

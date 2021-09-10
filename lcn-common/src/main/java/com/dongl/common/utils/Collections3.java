@@ -8,9 +8,11 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * The class Collections 3.
- *
- * @author paascloud.net@gmail.com
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName Collections3.java
+ * @Description 集合运算----这个可以使用 GoogleGuava
+ * @createTime 2021-09-09 09:46:00
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Collections3 {

@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * The class Recursion tree util.
- *
- * @author paascloud.net@gmail.com
- */
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RecursionTreeUtil {
 	/**

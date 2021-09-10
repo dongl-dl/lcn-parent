@@ -9,9 +9,11 @@ import java.net.NetworkInterface;
 import java.util.Enumeration;
 
 /**
- * 系统工具类，用于获取系统相关信息
- *
- * @author paascloud.net @gmail.com
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName CustomSystemUtil.java
+ * @Description 系统工具类，用于获取系统相关信息
+ * @createTime 2021-09-09 09:46:00
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CustomSystemUtil {
@@ -66,5 +68,13 @@ public class CustomSystemUtil {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static void main(String[] args) {
+		String intranetIp = getIntranetIp();
+		String internetIp = getInternetIp();
+
+		System.out.println("内网IP: " + internetIp);
+		System.out.println("外网IP: " + intranetIp);
 	}
 }

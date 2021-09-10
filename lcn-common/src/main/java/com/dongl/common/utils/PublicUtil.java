@@ -8,9 +8,11 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * The class Public util.
- *
- * @author paascloud.net@gmail.com
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName PublicUtil.java
+ * @Description
+ * @createTime 2021-06-29 16:50:00
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PublicUtil {

@@ -4,11 +4,12 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-
 /**
- * The class Big decimal util.
- *
- * @author paascloud.net@gmail.com
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName BigDecimalUtil.java
+ * @Description BigDecimal运算
+ * @createTime 2021-09-09 09:46:00
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BigDecimalUtil {

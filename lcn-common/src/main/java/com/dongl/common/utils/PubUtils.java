@@ -21,7 +21,7 @@ public class PubUtils {
 	/**
 	 * 匹配手机号码, 支持+86和86开头
 	 */
-	private static final String REGX_MOBILENUM = "^((\\+86)|(86))?(13|15|17|18)\\d{9}$";
+	private static final String REGX_MOBILENUM = "^((\\+86)|(86))?(13|14|15|17|18)\\d{9}$";
 
 	/**
 	 * 匹配邮箱帐号

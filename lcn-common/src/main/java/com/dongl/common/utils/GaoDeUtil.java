@@ -11,9 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 
 
 /**
- * The class Gao de util.
- *
- * @author paascloud.net @gmail.com
+ * @author D-L
+ * @version 1.0.0
+ * @ClassName GaoDeUtil.java
+ * @Description 根据IP获取省份和城市   注意这里的ip不能为局域网的ip地址
+ * @createTime 2021-08-26 09:22:00
  */
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
