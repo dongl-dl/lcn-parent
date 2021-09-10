@@ -8,9 +8,11 @@ import com.dongl.oss.model.OssFileConfig;
 import com.dongl.oss.service.IOssService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.UUID;
 
 
@@ -19,7 +21,10 @@ import java.util.UUID;
 @Slf4j
 public class OssFileController {
 
-    @Autowired private IOssService ossService;
+    @Autowired
+    private IOssService ossService;
+    @Resource
+    private TaskExecutor taskExecutor;
 
     /** 上传文件 （单文件上传） */
     @PostMapping("/fileUpload/{bizType}")
@@ -57,6 +62,14 @@ public class OssFileController {
             log.error("upload error, fileName = {}", file.getOriginalFilename(), e);
             throw new BusinessException("110120" , "系统异常");
         }
+    }
+
+    @GetMapping("/testPoolTaskExecutor")
+    public ResponseParams testPoolTaskExecutor(){
+        taskExecutor.execute(()->{
+            System.out.println("------------------------执行任务：" + Thread.currentThread().getName());
+        });
+        return new ResponseParams().success();
     }
 
 }
