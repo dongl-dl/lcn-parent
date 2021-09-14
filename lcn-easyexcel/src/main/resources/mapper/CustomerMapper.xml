@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dongl.easyexcel.mapper.CustomerMapper">
+    <resultMap id="BaseResultMap" type="com.dongl.easyexcel.domian.Customer">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="customer_name" property="customerName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="equipment_code" property="equipmentCode" jdbcType="VARCHAR"/>
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="country_id" property="countryId" jdbcType="VARCHAR"/>
+        <result column="register_ip" property="registerIp" jdbcType="VARCHAR"/>
+        <result column="client_version" property="clientVersion" jdbcType="VARCHAR"/>
+        <result column="channel_code" property="channelCode" jdbcType="VARCHAR"/>
+        <result column="country_code" property="countryCode" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="IDFA" property="IDFA" jdbcType="VARCHAR"/>
+        <result column="role" property="role" jdbcType="VARCHAR"/>
+        <result column="expand2" property="expand2" jdbcType="VARCHAR"/>
+        <result column="expand3" property="expand3" jdbcType="VARCHAR"/>
+        <result column="expand4" property="expand4" jdbcType="VARCHAR"/>
+        <result column="expand5" property="expand5" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Insert_Not_Null_Column">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="customerName != null">
+                customer_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="equipmentCode != null">
+                equipment_code,
+            </if>
+            <if test="registerTime != null">
+                register_time,
+            </if>
+            <if test="role != null">
+                role,
+            </if>
+            <if test="countryId != null">
+                country_id,
+            </if>
+            <if test="registerIp != null">
+                register_ip,
+            </if>
+            <if test="clientVersion != null">
+                client_version,
+            </if>
+            <if test="channelCode != null">
+                channel_code,
+            </if>
+            <if test="countryCode != null and countryCode !=''">
+                country_code,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="IDFA != null">
+                IDFA,
+            </if>
+            <if test="expand2 != null">
+                expand2,
+            </if>
+            <if test="expand3 != null">
+                expand3,
+            </if>
+            <if test="expand4 != null">
+                expand4,
+            </if>
+            <if test="expand5 != null">
+                expand5,
+            </if>
+        </trim>
+    </sql>
+    <sql id="Insert_Not_Null_record">
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="customerName != null">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="equipmentCode != null">
+                #{equipmentCode,jdbcType=VARCHAR},
+            </if>
+            <if test="registerTime != null">
+                #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="role != null">
+                #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="countryId != null">
+                #{countryId,jdbcType=VARCHAR},
+            </if>
+            <if test="registerIp != null">
+                #{registerIp,jdbcType=VARCHAR},
+            </if>
+            <if test="clientVersion != null">
+                #{clientVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="channelCode != null">
+                #{channelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="countryCode != null and countryCode !=''">
+                #{countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="IDFA != null">
+                #{IDFA,jdbcType=VARCHAR},
+            </if>
+            <if test="expand2 != null">
+                #{expand2,jdbcType=VARCHAR},
+            </if>
+            <if test="expand3 != null">
+                #{expand3,jdbcType=VARCHAR},
+            </if>
+            <if test="expand4 != null">
+                #{expand4,jdbcType=VARCHAR},
+            </if>
+            <if test="expand5 != null">
+                #{expand5,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </sql>
+
+    <insert id="insertSelective" parameterType="com.dongl.easyexcel.domian.Customer">
+        insert into eb_customer
+        <include refid="Insert_Not_Null_Column"/>
+        <include refid="Insert_Not_Null_record"/>
+    </insert>
+</mapper>

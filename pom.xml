@@ -36,5 +36,6 @@
         <module>lcn-redis</module>
         <module>lcn-goods</module>
         <module>lcn-aliyun-oss</module>
+        <module>lcn-easyexcel</module>
     </modules>
 </project>
