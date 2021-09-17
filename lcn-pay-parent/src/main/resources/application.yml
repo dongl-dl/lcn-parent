@@ -1,0 +1,46 @@
+server:
+  port: 10024
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+  application:
+    name: lcn-apy-parent
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.98.119.49:3306/test?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ellabook
+    password: Ellabook@13579
+    dbcp2:
+      initial-size: 5
+      min-idle: 5
+      max-total: 5
+      max-wait-millis: 200
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    password: 961230
+    database: 0
+    timeout: 2000
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+
+
+logging:
+  level:
+    root: info
+    com.dongl.payparent.mapper: DEBUG
+    org.springframework.web: ERROR
+    org.springframework: ERROR

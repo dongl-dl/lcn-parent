@@ -37,5 +37,6 @@
         <module>lcn-goods</module>
         <module>lcn-aliyun-oss</module>
         <module>lcn-easyexcel</module>
+        <module>lcn-pay-parent</module>
     </modules>
 </project>
